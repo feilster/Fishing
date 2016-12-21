@@ -2,19 +2,20 @@
 <html ng-app="FishingApp">
   <head>
     <meta charset="utf-8">
-    <script src="./js/angular/angular.min.js"></script>
-    <script src="./src/app.js"></script>
+    <script src="./assets/libs/angular.min.js"></script>
+    <script src="./app/app.js"></script>
     <title>My Fishing App</title>
   </head>
   <body>
     <h1>My Fishing App</h1>
     <div ng-controller="FishController">
-      <input type="text" ng-model="fish">
-      Fish: {{fish}}
-    </div>
-   <span ng-repeat="venue in venues">
-    {{venue.code}}
+      <input type="text" ng-model="desc">
+      Fish: {{desc}}
+      <br>
+   <span ng-repeat="fish in fishes">
+    1. {{fish.Code}}
 
 </span>
+    </div>
   </body>
 </html>
