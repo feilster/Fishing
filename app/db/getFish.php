@@ -1,8 +1,6 @@
-<?php 
-$servername = "localhost:3307";
-$username = "root";
-$password = "";
-$dbname = "fishing";
+<?php
+
+include_once 'db.php';
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if(!$conn){

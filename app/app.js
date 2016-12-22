@@ -1,22 +1,27 @@
 (function () {
 'use strict';
 
-angular.module('FishingApp', [])
+angular.module('fishingApp', ['ui.router'])
 
-.controller('FishController', function ($scope, $http) {
-  $scope.desc='jjiijjj';
-   
-   console.log('getting fish');
-  getFish(); // Load all available fish 
-    console.log('got fish');
+.config(function($stateProvider, $urlRouterProvider) {
 
-  function getFish(){  
-  $http.get("http://localhost:8080/Fishing/app/db/getFish.php").success(function(data){
-     console.log('ret fish');
-       $scope.fishes = data;
-       console.log('found '+$scope.fishes.length);
-       });
-  };
+    $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: './app/home.html'
+    })
+    .state('fish', {
+      url: '/fish',
+      templateUrl: './app/admin/fish.html'
+    })
+    .state('venues', {
+      url: '/venues',
+      templateUrl: './app/admin/venues.html'
+    })
+    .state('sessions', {
+      url: '/sessions',
+      templateUrl: './app/admin/sessions.html'
+    })
 
 });
 

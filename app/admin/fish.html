@@ -1,0 +1,23 @@
+          <div ng-controller="FishController as fishCtrl">
+            <div class="form-group">
+            <label for="fishCode">Code</label><input id="fishCode" type="text" ng-model="fishCtrl.code">
+            <label for="fishDescription">Description</label><input id="fishDescription" type="text" ng-model="fishCtrl.description">
+            <button type="button" class="btn btn-primary" ng-click="fishCtrl.insertFish()">Go</button>
+            Fish: {{fishCtrl.desc}}
+          </div>
+            <br>
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="fish in fishCtrl.fishes">
+                  <td>{{fish.Code}}</td>
+                  <td>{{fish.Description}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
