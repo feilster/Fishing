@@ -14,7 +14,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="fish in fishCtrl.fishes">
+                <tr ng-repeat="fish in fishCtrl.fishes" ng-click="fishCtrl.setSelected(fish.code)">
                   <td>{{fish.code}}</td>
                   <td>{{fish.description}}</td>
                 </tr>

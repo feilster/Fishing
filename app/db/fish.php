@@ -12,11 +12,14 @@ if( isset($_POST['type']) && !empty( isset($_POST['type']) ) ){
 		case "insertFish":
 			insertFish($conn);
 			break;
+		case "deleteFish":
+			deleteFish($conn, $_POST['code']);
+			break;
 		default:
-			invalidRequest();
+		error("Invalid request");
 	}
 }else{
-	invalidRequest();
+	error("Invalid request");
 }
 
 function getFish($conn){
@@ -29,8 +32,9 @@ function getFish($conn){
 		$result = mysqli_query($conn, $sql);
 
 		if(mysqli_num_rows($result) > 0){
-			while($row = mysqli_fetch_assoc($result)){
-				$data[] = $row;
+			while($row = $result->fetch_assoc()){
+				$data['success'] = false;
+				$data['records'][] = $row;
 			}
 		} else {
 			$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
@@ -41,11 +45,7 @@ function getFish($conn){
 		exit;
 
 	}catch (Exception $e){
-		$data = array();
-		$data['success'] = false;
-		$data['message'] = $e->getMessage();
-		echo json_encode($data);
-		exit;
+		error($e->getMessage());
 	}
 }
 
@@ -74,22 +74,42 @@ function insertFish($conn){
 		exit;
 
 	}catch (Exception $e){
-		$data = array();
-		$data['success'] = false;
-		$data['message'] = $e->getMessage();
-		echo json_encode($data);
-		exit;
+		error($e->getMessage());
 	}
 }
 
-function invalidRequest()
+function deleteFish($conn, $code = ''){
+	try{
+
+		if($code == ''){
+			$data['success'] = false;
+			$data['message'] = 'Failed: Code cannot be empty';
+		} else {
+			$sql = "DELETE FROM fish WHERE code = $code";
+			if ($conn->query( $sql )) {
+				$data['success'] = true;
+				$data['message'] = "Successfully deleted";
+			} else {
+				$data['success'] = false;
+				$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
+			}
+		}
+			$conn->close();
+			echo json_encode($data);
+			exit;
+
+	}catch (Exception $e){
+		error($e->getMessage());
+	}
+}
+
+function error($errorMessage)
 {
 	$data = array();
 	$data['success'] = false;
-	$data['message'] = "Invalid request.";
+	$data['message'] = $errorMessage;
 	echo json_encode($data);
 	exit;
 }
-
 
 ?>

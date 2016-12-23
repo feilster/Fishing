@@ -20,28 +20,42 @@
           data: $.param({'type':'getFish'}),
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }).success(function(data, status, headers, config) {
-          console.log('ret fish');
-          vm.fishes = data;
-          console.log('found '+vm.fishes.length);
+          vm.fishes = data.records;
       }).error(function(data, status, headers, config) {
-  	      console.log("halllooo");
+          vm.errorMessage = data.message;
   	  });
     };
 
     vm.insertFish = function (){
-      console.log('start ins fish');
       $http({
           method: "post",
           url: "http://localhost:8080/Fishing/app/db/fish.php",
           data: $.param({'type':'insertFish', 'code':vm.code, 'description':vm.description}),
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }).success(function(data, status, headers, config) {
-          console.log('ins fish '+data);
           vm.errorMessage = data.message;
           getFish();
       }).error(function(data, status, headers, config) {
-	        console.log("halllooo");
+          vm.errorMessage = data.message;
 	    });
+    };
+
+    vm.deleteFish = function (){
+      $http({
+          method: "post",
+          url: "http://localhost:8080/Fishing/app/db/fish.php",
+          data: $.param({'type':'deleteFish', 'code':vm.code}),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }).success(function(data, status, headers, config) {
+          vm.errorMessage = data.message;
+          getFish();
+      }).error(function(data, status, headers, config) {
+          vm.errorMessage = data.message;
+	    });
+    };
+
+    vm.setSelected = function (code){
+      console.log("sel = "+code);
     };
 
   });
