@@ -1,31 +1,48 @@
 (function () {
-'use strict';
+  'use strict';
 
-angular.module('fishingApp')
+  angular.module('fishingApp')
 
-.controller('FishController', function ($scope, $http) {
+  .controller('FishController', function ($scope, $http) {
 
-  var vm = this;
+    var vm = this;
 
-  vm.code = null;
-  vm.description = null;
+    vm.code = null;
+    vm.description = null;
+    vm.errorMessage = null;
 
-  getFish(); // Load all available fish
+    getFish(); // Load all available fish
 
-  function getFish(){
-    $http.get("http://localhost:8080/Fishing/app/db/getFish.php").success(function(data){
-      console.log('ret fish');
-        vm.fishes = data;
-        console.log('found '+vm.fishes.length);
-       });
-  };
+    function getFish(){
+      $http({
+          method: "post",
+          url: "http://localhost:8080/Fishing/app/db/fish.php",
+          data: $.param({'type':'getFish'}),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }).success(function(data, status, headers, config) {
+          console.log('ret fish');
+          vm.fishes = data;
+          console.log('found '+vm.fishes.length);
+      }).error(function(data, status, headers, config) {
+  	      console.log("halllooo");
+  	  });
+    };
 
-  vm.insertFish = function (){
-    $http.post("http://localhost:8080/Fishing/app/db/insertFish.php?code="+vm.code+"&description="+vm.description).success(function(data){
-      console.log('ins fish');
-      getFish();
-    });
-  };
+    vm.insertFish = function (){
+      console.log('start ins fish');
+      $http({
+          method: "post",
+          url: "http://localhost:8080/Fishing/app/db/fish.php",
+          data: $.param({'type':'insertFish', 'code':vm.code, 'description':vm.description}),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }).success(function(data, status, headers, config) {
+          console.log('ins fish '+data);
+          vm.errorMessage = data.message;
+          getFish();
+      }).error(function(data, status, headers, config) {
+	        console.log("halllooo");
+	    });
+    };
 
   });
 
