@@ -2,7 +2,8 @@
             <div class="form-group">
             <label for="fishCode">Code</label><input id="fishCode" type="text" ng-model="fishCtrl.code">
             <label for="fishDescription">Description</label><input id="fishDescription" type="text" ng-model="fishCtrl.description">
-            <button type="button" class="btn btn-primary" ng-click="fishCtrl.insertFish()">Go</button>
+            <label for="waterType">WaterType</label><select id="waterType" ng-model="fishCtrl.waterTypeCode" ng-options="waterType.code as waterType.description for waterType in fishCtrl.model.waterTypes"></select>
+            <button type="button" class="btn btn-primary" ng-click="fishCtrl.insertFish()">Add</button>
             {{fishCtrl.errorMessage}}
           </div>
             <br>
@@ -11,12 +12,15 @@
                 <tr>
                   <th>Code</th>
                   <th>Description</th>
+                  <th>Water Type</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="fish in fishCtrl.fishes" ng-click="fishCtrl.setSelected(fish.code)">
+                <tr ng-repeat="fish in fishCtrl.model.fishes" ng-click="fishCtrl.setSelected(fish.code)">
                   <td>{{fish.code}}</td>
                   <td>{{fish.description}}</td>
+                  <td>{{fish.water_type}}</td>
+                  <td><a href="#" ng-click="fishCtrl.deleteFish(fish.code)"><i class="fa fa-trash-o fa-lg" style="color: red;"></i></a></td>
                 </tr>
               </tbody>
             </table>

@@ -31,12 +31,13 @@ function getFish($conn){
 
 		$result = mysqli_query($conn, $sql);
 
-		if(mysqli_num_rows($result) > 0){
+		if($conn->query( $sql )){
+			$data['success'] = true;
 			while($row = $result->fetch_assoc()){
-				$data['success'] = false;
 				$data['records'][] = $row;
 			}
 		} else {
+			$data['success'] = false;
 			$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
 		};
 
@@ -54,12 +55,13 @@ function insertFish($conn){
 		$data = array();
 		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
 		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
+		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "INSERT INTO fish (code, description)  VALUES ('$code', '$description')";
+			$sql = "INSERT INTO fish (code, description, water_type)  VALUES ('$code', '$description', '$water_type')";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully added";
@@ -81,11 +83,14 @@ function insertFish($conn){
 function deleteFish($conn, $code = ''){
 	try{
 
+		$data = array();
+		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
+
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "DELETE FROM fish WHERE code = $code";
+			$sql = "DELETE FROM fish WHERE code = '$code'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully deleted";
