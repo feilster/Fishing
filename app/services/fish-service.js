@@ -22,9 +22,9 @@
       });
     };
 
-    service.insertFish = function (code, description, waterTypeCode){
+    service.insertFish = function (code, type, subType, description, waterTypeCode, otherNames, indigenous){
       MessageService.clearMessages();
-      FishFactory.insertFish(code, description, waterTypeCode)
+      FishFactory.insertFish(code, type, subType, description, waterTypeCode, otherNames, indigenous)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateFish = function (code, type, subType, description, waterTypeCode, otherNames){
+    service.updateFish = function (code, type, subType, description, waterTypeCode, otherNames, indigenous){
       MessageService.clearMessages();
-      FishFactory.updateFish(code, type, subType, description, waterTypeCode, otherNames)
+      FishFactory.updateFish(code, type, subType, description, waterTypeCode, otherNames, indigenous)
       .then(function(response) {
         doThen(response);
       }, function(response) {

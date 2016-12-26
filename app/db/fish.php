@@ -56,15 +56,19 @@ function getFish($conn){
 function insertFish($conn){
 	try{
 		$data = array();
-		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
+		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? strtoupper($_POST['code']) : '');
+		$type = $conn->real_escape_string(isset( $_POST['type'] ) ? $_POST['type'] : '');
+		$sub_type = $conn->real_escape_string(isset( $_POST['subType'] ) ? $_POST['subType'] : '');
 		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
 		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
+		$other_names = $conn->real_escape_string(isset( $_POST['otherNames'] ) ? $_POST['otherNames'] : '');
+		$indigenous = $conn->real_escape_string(isset( $_POST['indigenous'] ) ? $_POST['indigenous'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "INSERT INTO fish (code, description, water_type)  VALUES ('$code', '$description', '$water_type')";
+			$sql = "INSERT INTO fish (code, type, sub_type, description, water_type, other_names, indigenous)  VALUES ('$code', '$type', '$sub_type', '$description', '$water_type', '$other_names', '$indigenous')";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully added";
@@ -120,12 +124,13 @@ function updateFish($conn){
 		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
 		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
 		$other_names = $conn->real_escape_string(isset( $_POST['otherNames'] ) ? $_POST['otherNames'] : '');
+		$indigenous = $conn->real_escape_string(isset( $_POST['indigenous'] ) ? $_POST['indigenous'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "update fish set type = '$type', sub_type = '$sub_type', description = '$description', water_type = '$water_type', other_names = '$other_names' where code = '$code'";
+			$sql = "update fish set type = '$type', sub_type = '$sub_type', description = '$description', water_type = '$water_type', other_names = '$other_names', indigenous = '$indigenous' where code = '$code'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";

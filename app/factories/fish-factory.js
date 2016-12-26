@@ -18,11 +18,11 @@
          return promise;
      };
 
-     factory.insertFish = function (code, description, waterTypeCode){
+     factory.insertFish = function (code, type, subType, description, waterTypeCode, otherNames, indigenous){
           var promise = $http({
               method: 'POST',
               url: 'http://localhost:8080/Fishing/app/db/fish.php',
-              data: $.param({'requestType':'insertFish', 'code':code, 'description':description, 'waterTypeCode':waterTypeCode}),
+              data: $.param({'requestType':'insertFish', 'code':code, 'type':type, 'subType':subType, 'description':description, 'waterTypeCode':waterTypeCode, 'otherNames':otherNames, 'indigenous':indigenous}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
@@ -38,11 +38,11 @@
            return promise;
        };
 
-       factory.updateFish = function (code, type, subType, description, waterTypeCode, otherNames){
+       factory.updateFish = function (code, type, subType, description, waterTypeCode, otherNames, indigenous){
             var promise = $http({
                 method: 'POST',
                 url: 'http://localhost:8080/Fishing/app/db/fish.php',
-                data: $.param({'requestType':'updateFish', 'code':code, 'type':type, 'subType':subType, 'description':description, 'waterTypeCode':waterTypeCode, 'otherNames':otherNames}),
+                data: $.param({'requestType':'updateFish', 'code':code.toUpperCase(), 'type':type, 'subType':subType, 'description':description, 'waterTypeCode':waterTypeCode, 'otherNames':otherNames, 'indigenous':indigenous}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

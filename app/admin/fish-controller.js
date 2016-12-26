@@ -6,6 +6,7 @@
   .controller('FishController', function (FishService, WaterTypeService) {
 
     var vm = this;
+    vm.indigenousTypes = [{code:'Y', description:'Yes'}, {code:'N', description:'No'}]
 
     vm.fishModel = FishService;
     vm.waterTypeModel = WaterTypeService;
