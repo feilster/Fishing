@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateFish = function (code, description, waterTypeCode){
+    service.updateFish = function (code, type, subType, description, waterTypeCode, otherNames){
       MessageService.clearMessages();
-      FishFactory.updateFish(code, description, waterTypeCode)
+      FishFactory.updateFish(code, type, subType, description, waterTypeCode, otherNames)
       .then(function(response) {
         doThen(response);
       }, function(response) {

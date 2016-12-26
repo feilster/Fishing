@@ -2,8 +2,8 @@
 
 include_once 'db.php';
 
-if( isset($_POST['type']) && !empty( isset($_POST['type']) ) ){
-	$type = $_POST['type'];
+if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
+	$type = $_POST['requestType'];
 
 	switch ($type) {
 		case "getFish":
@@ -115,14 +115,17 @@ function updateFish($conn){
 	try{
 		$data = array();
 		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
+		$type = $conn->real_escape_string(isset( $_POST['type'] ) ? $_POST['type'] : '');
+		$sub_type = $conn->real_escape_string(isset( $_POST['subType'] ) ? $_POST['subType'] : '');
 		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
 		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
+		$other_names = $conn->real_escape_string(isset( $_POST['otherNames'] ) ? $_POST['otherNames'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "update fish set description = '$description', water_type = '$water_type' where code = '$code'";
+			$sql = "update fish set type = '$type', sub_type = '$sub_type', description = '$description', water_type = '$water_type', other_names = '$other_names' where code = '$code'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";

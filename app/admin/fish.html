@@ -5,22 +5,31 @@
               <thead>
                 <tr>
                   <th>Code</th>
+                  <th>Type</th>
+                  <th>Sub Type</th>
                   <th>Description</th>
                   <th>Water Type</th>
+                  <th>Other Names</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><input id="fishCode" type="text" ng-model="fishCtrl.code"></td>
-                  <td><input id="fishDescription" type="text" ng-model="fishCtrl.description"></td>
+                  <td><input id="code" type="text" ng-model="fishCtrl.code"></td>
+                  <td><input id="type" type="text" ng-model="fishCtrl.type"></td>
+                  <td><input id="subType" type="text" ng-model="fishCtrl.subType"></td>
+                  <td><input id="description" type="text" ng-model="fishCtrl.description"></td>
                   <td><select id="waterType" ng-model="fishCtrl.waterTypeCode" ng-options="waterType.code as waterType.description for waterType in fishCtrl.waterTypeModel.waterTypes"></select></td>
+                  <td><input id="otherNames" type="text" ng-model="fishCtrl.otherNames"></td>
                   <td><a href="#" ng-click="fishCtrl.fishModel.insertFish(fishCtrl.code, fishCtrl.description, fishCtrl.waterTypeCode)"><span class="fa fa-plus fa-lg fa-icon"></span></a><a href="#" ng-click="fishCtrl.clearFish()"><span class="fa fa-eraser fa-lg fa-icon"></span></a></td>
                 </tr>
                 <tr ng-repeat="fish in fishCtrl.fishModel.fishes">
                   <td>{{fish.code}}</td>
-                  <td><input id="fishDescription" type="text" ng-model="fish.description"></td>
+                  <td><input id="type" type="text" ng-model="fish.type"></td>
+                  <td><input id="subType" type="text" ng-model="fish.sub_type"></td>
+                  <td><input id="description" type="text" ng-model="fish.description"></td>
                   <td><select id="waterType" ng-model="fish.water_type" ng-options="waterType.code as waterType.description for waterType in fishCtrl.waterTypeModel.waterTypes"></select></td>
-                  <td><a href="#" ng-click="fishCtrl.fishModel.updateFish(fish.code, fish.description, fish.water_type)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="fishCtrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+                  <td><input id="otherNames" type="text" ng-model="fish.other_names"></td>
+                  <td><a href="#" ng-click="fishCtrl.fishModel.updateFish(fish.code, fish.type, fish.subType, fish.description, fish.water_type, fish.other_names)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="fishCtrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
                 </tr>
               </tbody>
             </table>

@@ -12,7 +12,7 @@
          var promise = $http({
              method: 'POST',
              url: 'http://localhost:8080/Fishing/app/db/fish.php',
-             data: $.param({'type':'getFish'}),
+             data: $.param({'requestType':'getFish'}),
              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
          return promise;
@@ -22,7 +22,7 @@
           var promise = $http({
               method: 'POST',
               url: 'http://localhost:8080/Fishing/app/db/fish.php',
-              data: $.param({'type':'insertFish', 'code':code, 'description':description, 'waterTypeCode':waterTypeCode}),
+              data: $.param({'requestType':'insertFish', 'code':code, 'description':description, 'waterTypeCode':waterTypeCode}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
@@ -32,17 +32,17 @@
            var promise = $http({
                method: 'POST',
                url: 'http://localhost:8080/Fishing/app/db/fish.php',
-               data: $.param({'type':'deleteFish', 'code':code}),
+               data: $.param({'requestType':'deleteFish', 'code':code}),
                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               });
            return promise;
        };
 
-       factory.updateFish = function (code, description, waterTypeCode){
+       factory.updateFish = function (code, type, subType, description, waterTypeCode, otherNames){
             var promise = $http({
                 method: 'POST',
                 url: 'http://localhost:8080/Fishing/app/db/fish.php',
-                data: $.param({'type':'updateFish', 'code':code, 'description':description, 'waterTypeCode':waterTypeCode}),
+                data: $.param({'requestType':'updateFish', 'code':code, 'type':type, 'subType':subType, 'description':description, 'waterTypeCode':waterTypeCode, 'otherNames':otherNames}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

@@ -20,8 +20,11 @@
 
     vm.clearFish = function (){
       vm.code = null;
+      vm.type = null;
+      vm.subType = null;
       vm.description = null;
       vm.waterTypeCode = null;
+      vm.otherNames = null;
     }
 
   });
