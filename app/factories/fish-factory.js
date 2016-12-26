@@ -38,6 +38,16 @@
            return promise;
        };
 
+       factory.updateFish = function (code, description, waterTypeCode){
+            var promise = $http({
+                method: 'POST',
+                url: 'http://localhost:8080/Fishing/app/db/fish.php',
+                data: $.param({'type':'updateFish', 'code':code, 'description':description, 'waterTypeCode':waterTypeCode}),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+               });
+            return promise;
+        };
+
        return factory;
 
   });

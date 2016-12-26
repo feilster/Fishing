@@ -15,6 +15,9 @@ if( isset($_POST['type']) && !empty( isset($_POST['type']) ) ){
 		case "deleteFish":
 			deleteFish($conn, $_POST['code']);
 			break;
+		case "updateFish":
+			updateFish($conn, $_POST['code']);
+			break;
 		default:
 		error("Invalid request");
 	}
@@ -102,6 +105,36 @@ function deleteFish($conn, $code = ''){
 			$conn->close();
 			echo json_encode($data);
 			exit;
+
+	}catch (Exception $e){
+		error($e->getMessage());
+	}
+}
+
+function updateFish($conn){
+	try{
+		$data = array();
+		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
+		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
+		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
+
+		if($code == ''){
+			$data['success'] = false;
+			$data['message'] = 'Failed: Code cannot be empty';
+		} else {
+			$sql = "update fish set description = '$description', water_type = '$water_type' where code = '$code'";
+			if ($conn->query( $sql )) {
+				$data['success'] = true;
+				$data['message'] = "Successfully updated";
+			} else {
+				$data['success'] = false;
+				$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
+			}
+		}
+
+		$conn->close();
+		echo json_encode($data);
+		exit;
 
 	}catch (Exception $e){
 		error($e->getMessage());

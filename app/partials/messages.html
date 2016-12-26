@@ -1,0 +1,5 @@
+<div ng-controller="MessageController as messageCtrl">
+  <a href="#" ng-click="messageCtrl.messageModel.clearSuccessMessage()" class="alert-a"><div class="alert alert-success" ng-show="messageCtrl.messageModel.successMessage">{{messageCtrl.messageModel.successMessage}}</div></a>
+  <a href="#" ng-click="messageCtrl.messageModel.clearErrorMessage()" class="alert-a"><div class="alert alert-danger" ng-show="messageCtrl.messageModel.errorMessage">{{messageCtrl.messageModel.errorMessage}}</div></a>
+  <a href="#" ng-click="messageCtrl.messageModel.clearInfoMessage()" class="alert-a"><div class="alert alert-info" ng-show="messageCtrl.messageModel.infoMessage">{{messageCtrl.messageModel.infoMessage}}</div></a>
+</div>
