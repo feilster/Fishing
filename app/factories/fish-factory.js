@@ -18,7 +18,7 @@
          return promise;
      };
 
-     factory.insertFish = function (code, type, subType, description, waterTypeCode, otherNames, indigenous){
+     factory.insertFish = function (fish){
           var promise = $http({
               method: 'POST',
               url: 'http://localhost:8080/Fishing/app/db/fish.php',

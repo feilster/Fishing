@@ -1,3 +1,7 @@
+body {
+  color: #666;
+}
+
 input[type="text"], select {
     border: solid 1px #CCC;
     height: 30px;
@@ -5,11 +9,38 @@ input[type="text"], select {
     margin: 0px;
 }
 
+/* custom classes */
+.alert-a:hover {
+  text-decoration: none;
+}
 
+.form-buttons {
+  margin: 30px 30px 0px 0px;
+}
+
+.form-input-sm {
+  max-width: 100px;
+}
+.subheader {
+  font-size: 20px;
+  display: inline;
+}
+
+.subheader span {
+  font-size: 15px;
+}
+
+/* bootstrap overrides */
 .container {
     padding: 0 2%;
 }
 
-.alert-a div {
-  text-decoration: none;
+label {
+  margin: 0px;
+}
+
+.well {
+  border: 0px;
+  margin: 10px 0px 5px 0px;
+  padding: 5px;
 }

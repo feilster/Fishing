@@ -12,7 +12,7 @@ angular.module('fishingApp', ['ui.router'])
     })
     .state('fish', {
       url: '/fish',
-      templateUrl: './app/admin/fish.html'
+      component: 'adminFish'
     })
     .state('venues', {
       url: '/venues',

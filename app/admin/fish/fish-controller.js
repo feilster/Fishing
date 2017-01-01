@@ -1,0 +1,52 @@
+(function () {
+  'use strict';
+
+  angular.module('fishingApp')
+
+  .controller('AdminFishController', function (FishService, WaterTypeService, $timeout) {
+
+    var vm = this;
+
+    vm.fish = {code: null, type: null, subtype: null, description: null, waterType: null, indigenousType: null, otherNames: null}
+    vm.indigenousTypes = [{code:'Y', description:'Yes'}, {code:'N', description:'No'}]
+
+    vm.fishModel = FishService;
+    vm.waterTypeModel = WaterTypeService;
+
+    // if empty list refresh from service
+    if(Object.keys(vm.fishModel.fishes).length==0) {
+      FishService.getFish();
+    }
+    // if empty list refresh from service
+    if(Object.keys(vm.waterTypeModel.waterTypes).length==0) {
+      WaterTypeService.getWaterTypes();
+    }
+  //  vm.waterTypeCode = model.waterTypes[0].code;
+
+    $timeout(function () {
+      vm.setSelects();
+    }, 2000);
+
+    vm.insertFish = function (){
+      vm.fishModel.insertFish(vm.fish);
+    }
+
+    vm.clearFish = function (){
+      vm.fish.code = null;
+      vm.fish.type = null;
+      vm.fish.subType = null;
+      vm.fish.description = null;
+      vm.fish.otherNames = null;
+      vm.setSelects();
+    }
+
+    vm.setSelects = function(){
+      if(vm.waterTypeModel.waterTypes){
+        vm.fish.waterType = vm.waterTypeModel.waterTypes[0].code;
+      }
+      vm.fish.indigenousType = vm.indigenousTypes[0].code;
+    }
+
+  });
+
+})();

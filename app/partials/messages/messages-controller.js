@@ -3,7 +3,7 @@
 
   angular.module('fishingApp')
 
-  .controller('MessageController', function (MessageService) {
+  .controller('MessagesController', function (MessageService) {
 
     var vm = this;
 
