@@ -3,14 +3,16 @@
 
   angular.module('fishingApp')
 
-  .controller('AdminFishController', function (FishService, WaterTypeService, $timeout) {
+  .controller('AdminFishController', function (FishService, WaterTypeService, MessageService, $timeout) {
 
     var vm = this;
 
-    vm.fish = {code: null, type: null, subtype: null, description: null, waterType: null, indigenousType: null, otherNames: null}
+    vm.fish = {code: null, type: null, subtype: null, description: null, waterType: null, indigenous: null, otherNames: null}
     vm.indigenousTypes = [{code:'Y', description:'Yes'}, {code:'N', description:'No'}]
+    vm.codeLength = "4";
 
     vm.fishModel = FishService;
+    vm.messageModel = MessageService;
     vm.waterTypeModel = WaterTypeService;
 
     // if empty list refresh from service
@@ -40,11 +42,16 @@
       vm.setSelects();
     }
 
+    vm.refreshFish = function (){
+      FishService.getFish();
+      MessageService.successMessage = 'Successfully refreshed';
+    }
+
     vm.setSelects = function(){
       if(vm.waterTypeModel.waterTypes){
         vm.fish.waterType = vm.waterTypeModel.waterTypes[0].code;
       }
-      vm.fish.indigenousType = vm.indigenousTypes[0].code;
+      vm.fish.indigenous = vm.indigenousTypes[0].code;
     }
 
   });

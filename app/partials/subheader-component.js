@@ -5,8 +5,9 @@
 
   .component('subheader', {
 
-    template: '<div class="well"><span class="subheader">{{$ctrl.text}} <span>{{$ctrl.subtext}}</span></span></div>',
-    bindings: {text: '@', subtext: '@'}
+    template: '<div class="well"><span class="subheader">{{$ctrl.text}} <span>{{$ctrl.subtext}}</span></span><span ng-transclude></span></div>',
+    bindings: {text: '@', subtext: '@'},
+    transclude: true
 
   });
 

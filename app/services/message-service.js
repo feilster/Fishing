@@ -11,6 +11,10 @@
     service.errorMessage = null;
     service.infoMessage = null;
 
+    service.minLength = "Value is too short: ";
+    service.requiredInput = "Value is required";
+    service.requiredSelect = "Value is required";
+
     service.clearSuccessMessage = function () {
       service.successMessage = null;
     }

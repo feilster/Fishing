@@ -24,7 +24,7 @@
 
     service.insertFish = function (fish){
       MessageService.clearMessages();
-      FishFactory.insertFish(fish.code, fish.type, fish.subType, fish.description, fish.waterType, fish.otherNames, fish.indigenousType)
+      FishFactory.insertFish(fish)
       .then(function(response) {
         doThen(response);
       }, function(response) {

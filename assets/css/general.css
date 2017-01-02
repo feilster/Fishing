@@ -14,13 +14,27 @@ input[type="text"], select {
   text-decoration: none;
 }
 
+.error-text {
+  color: #f30c08;
+}
+
 .form-buttons {
-  margin: 30px 30px 0px 0px;
+  margin: 15px 0px 0px 0px;
 }
 
 .form-input-sm {
   max-width: 100px;
 }
+
+.refresh-icon {
+  float: right;
+  margin: 5px;
+}
+
+.required-input:after {
+  content: '*';
+}
+
 .subheader {
   font-size: 20px;
   display: inline;
@@ -33,6 +47,14 @@ input[type="text"], select {
 /* bootstrap overrides */
 .container {
     padding: 0 2%;
+}
+
+.form-control {
+  height: 30px;
+}
+
+.form-group {
+  margin-bottom: 0px;
 }
 
 label {
