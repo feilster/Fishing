@@ -23,7 +23,7 @@ input[type="text"], select {
 }
 
 .form-input-sm {
-  max-width: 100px;
+  max-width: 130px;
 }
 
 .refresh-icon {

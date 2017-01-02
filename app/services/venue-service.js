@@ -3,17 +3,17 @@
 
   angular.module('fishingApp')
 
-  .service('FishService', function ($http, FishFactory, MessageService) {
+  .service('VenueService', function ($http, VenueFactory, MessageService) {
 
     var service = this;
 
-    service.fishes = {};
+    service.venues = {};
 
-    service.getFish = function (){
+    service.getVenues = function (){
       MessageService.clearMessages();
-      FishFactory.getFish()
+      VenueFactory.getVenues()
       .then(function (response) {
-        service.fishes = response.data.records;
+        service.venues = response.data.records;
         if(!response.data.success){
           MessageService.errorMessage = response.data.message;
         }
@@ -22,9 +22,9 @@
       });
     };
 
-    service.insertFish = function (fish){
+    service.insertVenue = function (fish){
       MessageService.clearMessages();
-      FishFactory.insertFish(fish)
+      VenueFactory.insertVenue(fish)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteFish = function (code){
+    service.deleteVenue = function (code){
       MessageService.clearMessages();
-      FishFactory.deleteFish(code)
+      VenueFactory.deleteVenue(code)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateFish = function (code, type, subType, description, otherNames, species, waterTypeCode, indigenous){
+    service.updateVenue = function (code, bodyOfWater, name, comments, rates){
       MessageService.clearMessages();
-      FishFactory.updateFish(code, type, subType, description, otherNames, species, waterTypeCode, indigenous)
+      VenueFactory.updateVenue(code, bodyOfWater, name, comments, rates)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -54,7 +54,7 @@
 
     function doThen (response) {
       if(response.data.success){
-        service.getFish();
+        service.getVenues();
         MessageService.successMessage = response.data.message;
       } else {
         MessageService.errorMessage = response.data.message;

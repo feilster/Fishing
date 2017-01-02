@@ -6,17 +6,17 @@ if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
 	$type = $_POST['requestType'];
 
 	switch ($type) {
-		case "getFish":
-			getFish($conn);
+		case "getVenues":
+			getVenues($conn);
 			break;
-		case "insertFish":
-			insertFish($conn);
+		case "insertVenue":
+			insertVenue($conn);
 			break;
-		case "deleteFish":
-			deleteFish($conn, $_POST['code']);
+		case "deleteVenue":
+			deleteVenue($conn, $_POST['code']);
 			break;
-		case "updateFish":
-			updateFish($conn, $_POST['code']);
+		case "updateVenue":
+			updateVenue($conn, $_POST['code']);
 			break;
 		default:
 		error("Invalid request");
@@ -25,12 +25,12 @@ if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
 	error("Invalid request");
 }
 
-function getFish($conn){
+function getVenues($conn){
 	try{
 
 		$data = array();
 
-		$sql = "SELECT * FROM fish";
+		$sql = "SELECT * FROM venues";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -53,23 +53,20 @@ function getFish($conn){
 	}
 }
 
-function insertFish($conn){
+function insertVenue($conn){
 	try{
 		$data = array();
 		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? strtoupper($_POST['code']) : '');
-		$type = $conn->real_escape_string(isset( $_POST['type'] ) ? $_POST['type'] : '');
-		$sub_type = $conn->real_escape_string(isset( $_POST['subType'] ) ? $_POST['subType'] : '');
-		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
-		$other_names = $conn->real_escape_string(isset( $_POST['otherNames'] ) ? $_POST['otherNames'] : '');
-		$species = $conn->real_escape_string(isset( $_POST['species'] ) ? $_POST['species'] : '');
-		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
-		$indigenous = $conn->real_escape_string(isset( $_POST['indigenous'] ) ? $_POST['indigenous'] : '');
+		$bodyOfWater = $conn->real_escape_string(isset( $_POST['bodyOfWater'] ) ? $_POST['bodyOfWater'] : '');
+		$name = $conn->real_escape_string(isset( $_POST['name'] ) ? $_POST['name'] : '');
+		$rates = $conn->real_escape_string(isset( $_POST['rates'] ) ? $_POST['rates'] : '');
+		$comments = $conn->real_escape_string(isset( $_POST['comments'] ) ? $_POST['comments'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "INSERT INTO fish (code, type, sub_type, description, other_names, species, water_type, indigenous)  VALUES ('$code', '$type', '$sub_type', '$description', '$other_names', '$species', '$water_type', '$indigenous')";
+			$sql = "INSERT INTO venues (code, body_of_water, name, rates, comments)  VALUES ('$code', '$bodyOfWater', '$name', '$rates', '$comments')";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully added";
@@ -88,7 +85,7 @@ function insertFish($conn){
 	}
 }
 
-function deleteFish($conn, $code = ''){
+function deleteVenue($conn, $code = ''){
 	try{
 
 		$data = array();
@@ -98,7 +95,7 @@ function deleteFish($conn, $code = ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "DELETE FROM fish WHERE code = '$code'";
+			$sql = "DELETE FROM venues WHERE code = '$code'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully deleted";
@@ -116,23 +113,20 @@ function deleteFish($conn, $code = ''){
 	}
 }
 
-function updateFish($conn){
+function updateVenue($conn){
 	try{
 		$data = array();
-		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? $_POST['code'] : '');
-		$type = $conn->real_escape_string(isset( $_POST['type'] ) ? $_POST['type'] : '');
-		$sub_type = $conn->real_escape_string(isset( $_POST['subType'] ) ? $_POST['subType'] : '');
-		$description = $conn->real_escape_string(isset( $_POST['description'] ) ? $_POST['description'] : '');
-		$other_names = $conn->real_escape_string(isset( $_POST['otherNames'] ) ? $_POST['otherNames'] : '');
-		$species = $conn->real_escape_string(isset( $_POST['species'] ) ? $_POST['species'] : '');
-		$water_type = $conn->real_escape_string(isset( $_POST['waterTypeCode'] ) ? $_POST['waterTypeCode'] : '');
-		$indigenous = $conn->real_escape_string(isset( $_POST['indigenous'] ) ? $_POST['indigenous'] : '');
+		$code = $conn->real_escape_string(isset( $_POST['code'] ) ? strtoupper($_POST['code']) : '');
+		$bodyOfWater = $conn->real_escape_string(isset( $_POST['bodyOfWater'] ) ? $_POST['bodyOfWater'] : '');
+		$name = $conn->real_escape_string(isset( $_POST['name'] ) ? $_POST['name'] : '');
+		$rates = $conn->real_escape_string(isset( $_POST['rates'] ) ? $_POST['rates'] : '');
+		$comments = $conn->real_escape_string(isset( $_POST['comments'] ) ? $_POST['comments'] : '');
 
 		if($code == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Code cannot be empty';
 		} else {
-			$sql = "update fish set type = '$type', sub_type = '$sub_type', description = '$description', other_names = '$other_names', species = '$species', water_type = '$water_type', indigenous = '$indigenous' where code = '$code'";
+			$sql = "update venues set body_of_water = '$bodyOfWater', name = '$name', rates = '$rates', comments = '$comments' where code = '$code'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";

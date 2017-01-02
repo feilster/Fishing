@@ -11,6 +11,8 @@
     service.errorMessage = null;
     service.infoMessage = null;
 
+    service.refreshSuccess = "Successfully refreshed";
+
     service.minLength = "Value is too short: ";
     service.requiredInput = "Value is required";
     service.requiredSelect = "Value is required";

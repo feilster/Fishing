@@ -7,7 +7,7 @@
 
     var vm = this;
 
-    vm.fish = {code: null, type: null, subtype: null, description: null, waterType: null, indigenous: null, otherNames: null}
+    vm.fish = {code: null, type: null, subtype: null, description: null, waterType: null, indigenous: null, otherNames: null, species: null}
     vm.indigenousTypes = [{code:'Y', description:'Yes'}, {code:'N', description:'No'}]
     vm.codeLength = "4";
 
@@ -39,6 +39,7 @@
       vm.fish.subType = null;
       vm.fish.description = null;
       vm.fish.otherNames = null;
+      vm.fish.species = null;
       vm.setSelects();
     }
 

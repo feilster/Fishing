@@ -3,23 +3,29 @@
             <subheader text="New Fish"></subheader>
             <form name="form">
               <div class="row" style="padding: 5px;">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                   <div class="form-group">
                     <label for="code" class="required-input">Code</label>
-                    <input id="code" name="code" type="text" class="form-control form-input-sm" ng-model="$ctrl.fish.code" maxlength="4" size="3" required ng-minlength="{{$ctrl.codeLength}}" only-alpha></input>
+                    <input id="code" name="code" type="text" class="form-control form-input-sm" ng-model="$ctrl.fish.code" maxlength="4" required ng-minlength="{{$ctrl.codeLength}}" only-alpha></input>
                     <div ng-messages="form.code.$error" ng-show="form.code.$touched && form.code.$invalid" class="error-text">
                       <div ng-message="required">{{$ctrl.messageModel.requiredInput}}</div>
                       <div ng-message="minlength">{{$ctrl.messageModel.minLength}}{{$ctrl.codeLength}}</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                   <div class="form-group">
                     <label for="subType">Sub Type</label>
                     <input id="subType" type="text" class="form-control" ng-model="$ctrl.fish.subType"></input>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                  <div class="form-group">
+                    <label for="otherNames">Other Names</label>
+                    <input id="otherNames" type="text" class="form-control" ng-model="$ctrl.fish.otherNames"></input>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                   <div class="form-group">
                     <label for="waterType" class="required-input">Water Type</label>
                     <select id="waterType" name="waterType" ng-model="$ctrl.fish.waterType" class="form-control form-input-sm" ng-options="waterType.code as waterType.description for waterType in $ctrl.waterTypeModel.waterTypes" required></select>
@@ -28,10 +34,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                   <div class="form-group">
-                    <label for="otherNames">Other Names</label>
-                    <input id="otherNames" type="text" class="form-control" ng-model="$ctrl.fish.otherNames"></input>
+                    <label for="indigenous" class="required-input">Indigenous</label>
+                    <select id="indigenous" name="indigenous" ng-model="$ctrl.fish.indigenous" class="form-control form-input-sm" ng-options="indigenous.code as indigenous.description for indigenous in $ctrl.indigenousTypes" required></select>
+                    <div ng-messages="form.indigenous.$error" ng-show="form.indigenous.$touched && form.indigenous.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -53,11 +62,8 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                   <div class="form-group">
-                    <label for="indigenous" class="required-input">Indigenous</label>
-                    <select id="indigenous" name="indigenous" ng-model="$ctrl.fish.indigenous" class="form-control form-input-sm" ng-options="indigenous.code as indigenous.description for indigenous in $ctrl.indigenousTypes" required></select>
-                    <div ng-messages="form.indigenous.$error" ng-show="form.indigenous.$touched && form.indigenous.$invalid" class="error-text">
-                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
-                    </div>
+                    <label for="species">Species</label>
+                    <input id="species" type="text" class="form-control" ng-model="$ctrl.fish.species"></input>
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -86,8 +92,9 @@
                 <th>Type</th>
                 <th>Sub Type</th>
                 <th>Description</th>
-                <th>Water Type</th>
                 <th>Other Names</th>
+                <th>Species</th>
+                <th>Water Type</th>
                 <th>Indigenous</th>
               </tr>
             </thead>
@@ -97,10 +104,11 @@
                 <td><input id="type" type="text" class="form-control" ng-model="fish.type"></td>
                 <td><input id="subType" type="text" class="form-control" ng-model="fish.sub_type"></td>
                 <td><input id="description" type="text" class="form-control" ng-model="fish.description"></td>
-                <td><select id="waterType" ng-model="fish.water_type" class="form-control" ng-options="waterType.code as waterType.description for waterType in $ctrl.waterTypeModel.waterTypes"></select></td>
                 <td><input id="otherNames" type="text" class="form-control" ng-model="fish.other_names"></td>
+                <td><input id="species" type="text" class="form-control" ng-model="fish.species"></td>
+                <td><select id="waterType" ng-model="fish.water_type" class="form-control" ng-options="waterType.code as waterType.description for waterType in $ctrl.waterTypeModel.waterTypes"></select></td>
                 <td><select id="indigenous" ng-model="fish.indigenous" class="form-control" ng-options="indigenous.code as indigenous.description for indigenous in $ctrl.indigenousTypes"></select></td>
-                <td><a href="#" ng-click="$ctrl.fishModel.updateFish(fish.code, fish.type, fish.sub_type, fish.description, fish.water_type, fish.other_names, fish.indigenous)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+                <td><a href="#" ng-click="$ctrl.fishModel.updateFish(fish.code, fish.type, fish.sub_type, fish.description, fish.other_names, fish.species, fish.water_type, fish.indigenous)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>
               <tr>
                 <td colspan="8" style="text-align: right;">{{$ctrl.fishModel.fishes.length}} found</td>

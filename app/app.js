@@ -16,7 +16,7 @@ angular.module('fishingApp', ['ui.router', 'ngMessages'])
     })
     .state('venues', {
       url: '/venues',
-      templateUrl: './app/admin/venues.html'
+      component: 'adminVenues'
     })
     .state('sessions', {
       url: '/sessions',
