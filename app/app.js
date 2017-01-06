@@ -18,9 +18,17 @@ angular.module('fishingApp', ['ui.router', 'ngMessages'])
       url: '/venues',
       component: 'adminVenues'
     })
+    .state('anglers', {
+      url: '/anglers',
+      component: 'adminAnglers'
+    })
     .state('sessions', {
       url: '/sessions',
-      templateUrl: './app/admin/sessions.html'
+      component: 'pagesSessions'
+    })
+    .state('catches', {
+      url: '/catches',
+      component: 'pagesCatches'
     })
 
 });

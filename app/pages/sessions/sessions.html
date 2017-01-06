@@ -1,0 +1,48 @@
+            <header text="Sessions"></header>
+            <messages></messages>
+            <subheader text="New Session"></subheader>
+            <form name="form">
+              <div class="row" style="padding: 5px;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="venue" class="required-input">Venue</label>
+                    <select id="venue" name="venue" ng-model="$ctrl.session.venue" class="form-control" ng-options="venue.code as venue.name  for venue in $ctrl.venueModel.venues" required></select>
+                    <div ng-messages="form.venue.$error" ng-show="form.venue.$touched && form.venue.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="date">date</label>
+                    <input id="date" type="text" class="form-control" ng-model="$ctrl.session.date"></input>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <br />
+          <subheader text="Past Sessions" subtext="({{$ctrl.sessionModel.sessions.length}} found)">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshSessions()">
+              <span class="fa fa-refresh fa-lg"></span>
+            </a>
+          </subheader>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Venue</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="session in $ctrl.sessionModel.sessions">
+                <td>{{session.id}}</td>
+                <td><select id="venue" ng-model="session.venue" class="form-control" ng-options="venue.code as venue.name for venue in $ctrl.venueModel.venues"></select></td>
+                <td><input id="date" type="text" class="form-control" ng-model="session.date"></td>
+                <td><a href="#" ng-click="$ctrl.sessionModel.updateSession(session)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.sessionModel.deleteSession(session.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+              </tr>
+              <tr>
+                <td colspan="8" style="text-align: right;">{{$ctrl.sessionModel.sessions.length}} found</td>
+              </tr>
+            </tbody>
+          </table>

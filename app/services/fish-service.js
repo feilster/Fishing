@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateFish = function (code, type, subType, description, otherNames, species, waterTypeCode, indigenous){
+    service.updateFish = function (fish){
       MessageService.clearMessages();
-      FishFactory.updateFish(code, type, subType, description, otherNames, species, waterTypeCode, indigenous)
+      FishFactory.updateFish(fish)
       .then(function(response) {
         doThen(response);
       }, function(response) {

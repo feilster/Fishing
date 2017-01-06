@@ -41,7 +41,7 @@
       vm.setSelects();
     }
 
-    vm.refreshVenue = function (){
+    vm.refreshVenues = function (){
       VenueService.getVenues();
       MessageService.successMessage = MessageService.refreshSuccessMessage;
     }

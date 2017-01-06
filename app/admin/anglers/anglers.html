@@ -1,0 +1,67 @@
+            <header text="Admin: Anglers"></header>
+            <messages></messages>
+            <subheader text="New Angler"></subheader>
+            <form name="form">
+              <div class="row" style="padding: 5px;">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <div class="form-group">
+                    <label for="nickName" class="required-input">Nick Name</label>
+                    <input id="nickName" name="nickName" type="text" class="form-control" ng-model="$ctrl.angler.nickName" maxlength="25" required></input>
+                    <div ng-messages="form.nickName.$error" ng-show="form.nickName.$touched && form.nickName.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredInput}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" type="text" class="form-control" ng-model="$ctrl.angler.firstName"></input>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <div class="form-group">
+                    <label for="surname">Surname</label>
+                    <input id="surname" type="text" class="form-control" ng-model="$ctrl.angler.surname"></input>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                  <div class="form-group form-buttons">
+                    <button type="submit" ng-click="$ctrl.insertAngler()" class="btn btn-primary" ng-disabled="form.$invalid">
+                      <span class="fa fa-plus fa-lg fa-icon"></span> Add
+                    </button>
+                    <button type="reset" ng-click="$ctrl.clearAngler()" class="btn btn-info">
+                      <span class="fa fa-eraser fa-lg fa-icon"></span> Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <br />
+          <subheader text="Current Anglers" subtext="({{$ctrl.anglerModel.anglers.length}} found)">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshAnglers()">
+              <span class="fa fa-refresh fa-lg"></span>
+            </a>
+          </subheader>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nick Name</th>
+                <th>First Name</th>
+                <th>Surname</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="angler in $ctrl.anglerModel.anglers">
+                <td>{{angler.id}}</td>
+                <td><input id="nickName" type="text" class="form-control" ng-model="angler.nick_name"></td>
+                <td><input id="firstName" type="text" class="form-control" ng-model="angler.first_name"></td>
+                <td><input id="surname" type="text" class="form-control" ng-model="angler.surname"></td>
+                <td><a href="#" ng-click="$ctrl.anglerModel.updateAngler(angler)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.anglerModel.deleteAngler(angler.id)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+              </tr>
+              <tr>
+                <td colspan="8" style="text-align: right;">{{$ctrl.anglerModel.anglers.length}} found</td>
+              </tr>
+            </tbody>
+          </table>

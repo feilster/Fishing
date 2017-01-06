@@ -39,11 +39,11 @@
            return promise;
        };
 
-       factory.updateFish = function (code, type, subType, description, otherNames, species, waterTypeCode, indigenous){
+       factory.updateFish = function (fish){
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateFish', 'code':code.toUpperCase(), 'type':type, 'subType':subType, 'description':description, 'otherNames':otherNames, 'species':species, 'waterTypeCode':waterTypeCode, 'indigenous':indigenous}),
+                data: $.param({'requestType':'updateFish', 'code':fish.code.toUpperCase(), 'type':fish.type, 'subType':fish.sub_type, 'description':fish.description, 'otherNames':fish.other_names, 'species':fish.species, 'waterTypeCode':fish.water_type, 'indigenous':fish.indigenous}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

@@ -3,17 +3,17 @@
 
   angular.module('fishingApp')
 
-  .service('VenueService', function ($http, VenueFactory, MessageService) {
+  .service('CatchService', function ($http, CatchFactory, MessageService) {
 
     var service = this;
 
-    service.venues = {};
+    service.catches = {};
 
-    service.getVenues = function (){
+    service.getCatches = function (){
       MessageService.clearMessages();
-      VenueFactory.getVenues()
+      CatchFactory.getCatches()
       .then(function (response) {
-        service.venues = response.data.records;
+        service.catches = response.data.records;
         if(!response.data.success){
           MessageService.errorMessage = response.data.message;
         }
@@ -22,9 +22,9 @@
       });
     };
 
-    service.insertVenue = function (venue){
+    service.insertCatch = function (catch){
       MessageService.clearMessages();
-      VenueFactory.insertVenue(venue)
+      CatchFactory.insertCatch(catch)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteVenue = function (code){
+    service.deleteCatch = function (code){
       MessageService.clearMessages();
-      VenueFactory.deleteVenue(code)
+      CatchFactory.deleteCatch(code)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateVenue = function (venue){
+    service.updateCatch = function (catch){
       MessageService.clearMessages();
-      VenueFactory.updateVenue(venue)
+      CatchFactory.updateCatch(catch)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -54,7 +54,7 @@
 
     function doThen (response) {
       if(response.data.success){
-        service.getVenues();
+        service.getCatches();
         MessageService.successMessage = response.data.message;
       } else {
         MessageService.errorMessage = response.data.message;

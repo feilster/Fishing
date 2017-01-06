@@ -3,47 +3,47 @@
 
   angular.module('fishingApp')
 
-  .factory('VenueFactory', function ($http) {
+  .factory('SessionFactory', function ($http) {
 
     var factory = {};
-    var url = 'http://localhost:8080/Fishing/app/db/venues.php';
+    var url = 'http://localhost:8080/Fishing/app/db/sessions.php';
 
     // get all data from database
-    factory.getVenues = function (){
+    factory.getSessions = function (){
          var promise = $http({
              method: 'POST',
              url: url,
-             data: $.param({'requestType':'getVenues'}),
+             data: $.param({'requestType':'getSessions'}),
              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
          return promise;
      };
 
-     factory.insertVenue = function (venue){
+     factory.insertSession = function (session){
           var promise = $http({
               method: 'POST',
               url: url,
-              data: $.param({'requestType':'insertVenue', 'code':venue.code.toUpperCase(), 'bodyOfWater':venue.bodyOfWater, 'name':venue.name, 'comments':venue.comments, 'rates':venue.rates}),
+              data: $.param({'requestType':'insertSession', 'session':session.session, 'date':session.date}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
       };
 
-      factory.deleteVenue = function (code){
+      factory.deleteSession = function (id){
            var promise = $http({
                method: 'POST',
                url: url,
-               data: $.param({'requestType':'deleteVenue', 'code':code}),
+               data: $.param({'requestType':'deleteSession', 'id':id}),
                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               });
            return promise;
        };
 
-       factory.updateVenue = function (venue){
+       factory.updateSession = function (session){
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateVenue', 'code':venue.code.toUpperCase(), 'bodyOfWater':venue.body_of_water, 'name':venue.name, 'comments':venue.comments, 'rates':venue.rates}),
+                data: $.param({'requestType':'updateSession', 'id':session.id , 'session':session.session, 'date':session.date}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

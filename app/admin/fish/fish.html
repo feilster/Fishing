@@ -108,7 +108,7 @@
                 <td><input id="species" type="text" class="form-control" ng-model="fish.species"></td>
                 <td><select id="waterType" ng-model="fish.water_type" class="form-control" ng-options="waterType.code as waterType.description for waterType in $ctrl.waterTypeModel.waterTypes"></select></td>
                 <td><select id="indigenous" ng-model="fish.indigenous" class="form-control" ng-options="indigenous.code as indigenous.description for indigenous in $ctrl.indigenousTypes"></select></td>
-                <td><a href="#" ng-click="$ctrl.fishModel.updateFish(fish.code, fish.type, fish.sub_type, fish.description, fish.other_names, fish.species, fish.water_type, fish.indigenous)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+                <td><a href="#" ng-click="$ctrl.fishModel.updateFish(fish)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.fishModel.deleteFish(fish.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>
               <tr>
                 <td colspan="8" style="text-align: right;">{{$ctrl.fishModel.fishes.length}} found</td>

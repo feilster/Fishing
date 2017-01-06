@@ -3,47 +3,47 @@
 
   angular.module('fishingApp')
 
-  .factory('VenueFactory', function ($http) {
+  .factory('CatchFactory', function ($http) {
 
     var factory = {};
-    var url = 'http://localhost:8080/Fishing/app/db/venues.php';
+    var url = 'http://localhost:8080/Fishing/app/db/catches.php';
 
     // get all data from database
-    factory.getVenues = function (){
+    factory.getCatches = function (){
          var promise = $http({
              method: 'POST',
              url: url,
-             data: $.param({'requestType':'getVenues'}),
+             data: $.param({'requestType':'getCatches'}),
              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
          return promise;
      };
 
-     factory.insertVenue = function (venue){
+     factory.insertCatch = function (catch){
           var promise = $http({
               method: 'POST',
               url: url,
-              data: $.param({'requestType':'insertVenue', 'code':venue.code.toUpperCase(), 'bodyOfWater':venue.bodyOfWater, 'name':venue.name, 'comments':venue.comments, 'rates':venue.rates}),
+              data: $.param({'requestType':'insertCatch', 'catch':catch.catch, 'date':catch.date}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
       };
 
-      factory.deleteVenue = function (code){
+      factory.deleteCatch = function (id){
            var promise = $http({
                method: 'POST',
                url: url,
-               data: $.param({'requestType':'deleteVenue', 'code':code}),
+               data: $.param({'requestType':'deleteCatch', 'id':id}),
                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               });
            return promise;
        };
 
-       factory.updateVenue = function (venue){
+       factory.updateCatch = function (catch){
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateVenue', 'code':venue.code.toUpperCase(), 'bodyOfWater':venue.body_of_water, 'name':venue.name, 'comments':venue.comments, 'rates':venue.rates}),
+                data: $.param({'requestType':'updateCatch', 'id':catch.id , 'catch':catch.catch, 'date':catch.date}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

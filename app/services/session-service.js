@@ -3,17 +3,17 @@
 
   angular.module('fishingApp')
 
-  .service('VenueService', function ($http, VenueFactory, MessageService) {
+  .service('SessionService', function ($http, SessionFactory, MessageService) {
 
     var service = this;
 
-    service.venues = {};
+    service.sessions = {};
 
-    service.getVenues = function (){
+    service.getSessions = function (){
       MessageService.clearMessages();
-      VenueFactory.getVenues()
+      SessionFactory.getSessions()
       .then(function (response) {
-        service.venues = response.data.records;
+        service.sessions = response.data.records;
         if(!response.data.success){
           MessageService.errorMessage = response.data.message;
         }
@@ -22,9 +22,9 @@
       });
     };
 
-    service.insertVenue = function (venue){
+    service.insertSession = function (session){
       MessageService.clearMessages();
-      VenueFactory.insertVenue(venue)
+      SessionFactory.insertSession(session)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteVenue = function (code){
+    service.deleteSession = function (code){
       MessageService.clearMessages();
-      VenueFactory.deleteVenue(code)
+      SessionFactory.deleteSession(code)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateVenue = function (venue){
+    service.updateSession = function (session){
       MessageService.clearMessages();
-      VenueFactory.updateVenue(venue)
+      SessionFactory.updateSession(session)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -54,7 +54,7 @@
 
     function doThen (response) {
       if(response.data.success){
-        service.getVenues();
+        service.getSessions();
         MessageService.successMessage = response.data.message;
       } else {
         MessageService.errorMessage = response.data.message;

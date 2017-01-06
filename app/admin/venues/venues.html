@@ -57,7 +57,7 @@
           </form>
           <br />
           <subheader text="Current Venues" subtext="({{$ctrl.venueModel.venues.length}} found)">
-            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshVenue()">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshVenues()">
               <span class="fa fa-refresh fa-lg"></span>
             </a>
           </subheader>
@@ -78,7 +78,7 @@
                 <td><input id="name" type="text" class="form-control" ng-model="venue.name"></td>
                 <td><input id="comments" type="text" class="form-control" ng-model="venue.comments"></td>
                 <td><input id="rates" type="text" class="form-control" ng-model="venue.rates"></td>
-                <td><a href="#" ng-click="$ctrl.venueModel.updateVenue(venue.code, venue.body_of_water, venue.name, venue.comments, venue.rates)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.venueModel.deleteVenue(venue.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+                <td><a href="#" ng-click="$ctrl.venueModel.updateVenue(venue)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.venueModel.deleteVenue(venue.code)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>
               <tr>
                 <td colspan="8" style="text-align: right;">{{$ctrl.venueModel.venues.length}} found</td>
