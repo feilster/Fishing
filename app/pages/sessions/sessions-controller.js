@@ -13,6 +13,19 @@
     vm.messageModel = MessageService;
     vm.venueModel = VenueService;
 
+    vm.datePopup = {
+      opened: false
+    };
+
+    vm.dateOptions = {
+       minDate: new Date(),
+       showWeeks: true
+    };
+
+    vm.openDate = function() {
+        vm.datePopup.opened = true;
+    };
+
     // if empty list refresh from service
     if(Object.keys(vm.sessionModel.sessions).length==0) {
       SessionService.getSessions();
@@ -27,7 +40,9 @@
     }, 2000);
 
     vm.insertSession = function (){
-      vm.venueModel.insertSession(vm.venue);
+      console.log('venue : '+vm.session.venue);
+      console.log('date : '+vm.session.date);
+      vm.sessionModel.insertSession(vm.session);
     }
 
     vm.clearSession = function (){

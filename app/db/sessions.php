@@ -56,12 +56,13 @@ function getSessions($conn){
 function insertSession($conn){
 	try{
 		$data = array();
-		$venue = $conn->real_escape_string(isset( $_POST['venue'] ) ? strtoupper($_POST['venue']) : '');
+		$venue = $conn->real_escape_string(isset( $_POST['venue'] ) ? $_POST['venue'] : '');
 		$date = $conn->real_escape_string(isset( $_POST['date'] ) ? $_POST['date'] : '');
+		$date = date('Y-m-d', strtotime($date));
 
-		if($code == ''){
+		if($venue == ''){
 			$data['success'] = false;
-			$data['message'] = 'Failed: Code cannot be empty';
+			$data['message'] = 'Failed: Venue cannot be empty';
 		} else {
 			$sql = "INSERT INTO sessions (venue, date)  VALUES ('$venue', '$date')";
 			if ($conn->query( $sql )) {

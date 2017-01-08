@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-angular.module('fishingApp', ['ui.router', 'ngMessages'])
+angular.module('fishingApp', ['ui.router', 'ui.bootstrap', 'ngMessages'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 

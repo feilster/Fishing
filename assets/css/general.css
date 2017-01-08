@@ -14,6 +14,11 @@ input[type="text"], select {
   text-decoration: none;
 }
 
+.date-input-button {
+  height: 30px;
+  margin-top: 20px;
+}
+
 .error-text {
   color: #f30c08;
 }
@@ -24,6 +29,10 @@ input[type="text"], select {
 
 .form-input-sm {
   max-width: 130px;
+}
+
+.form-input-md {
+  max-width: 200px;
 }
 
 .refresh-icon {

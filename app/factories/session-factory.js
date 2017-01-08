@@ -23,7 +23,7 @@
           var promise = $http({
               method: 'POST',
               url: url,
-              data: $.param({'requestType':'insertSession', 'session':session.session, 'date':session.date}),
+              data: $.param({'requestType':'insertSession', 'venue':session.venue, 'date':session.date}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
