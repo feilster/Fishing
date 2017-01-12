@@ -1,36 +1,24 @@
 
-            <header text="Sessions"></header>
+            <header text="Catches"></header>
             <messages></messages>
-            <subheader text="New Session"></subheader>
+            <subheader text="New Catch"></subheader>
             <form name="form">
               <div class="row" style="padding: 5px;">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group">
-                    <label for="venue" class="required-input">Venue</label>
-                    <select id="venue" name="venue" ng-model="$ctrl.session.venue" class="form-control" ng-options="venue.code as (venue.bodyOfWaterName + ' - ' + venue.name) for venue in $ctrl.venueModel.venues" required></select>
-                    <div ng-messages="form.venue.$error" ng-show="form.venue.$touched && form.venue.$invalid" class="error-text">
+                    <label for="session" class="required-input">Venue</label>
+                    <select id="session" name="session" ng-model="$ctrl.catch.session" class="form-control" ng-options="session.id as (session.date + ' - ' + session.venueName) for session in $ctrl.sessionModel.sessions" required></select>
+                    <div ng-messages="form.session.$error" ng-show="form.session.$touched && form.session.$invalid" class="error-text">
                       <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  <div class="input-group">
-                    <label for="date">Date</label>
-                    <input name="date" type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="$ctrl.session.date" is-open="$ctrl.datePopup.opened" datepicker-options="$ctrl.dateOptions" ng-required="true" close-text="Close" readonly="true" />
-                    <div ng-messages="form.date.$error" ng-show="form.date.$touched && form.date.$invalid" class="error-text">
-                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
-                    </div>
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-default date-input-button" ng-click="$ctrl.openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group form-buttons">
-                    <button type="submit" ng-click="$ctrl.insertSession()" class="btn btn-primary" ng-disabled="form.$invalid">
+                    <button type="submit" ng-click="$ctrl.catchModel.insertCatch()" class="btn btn-primary" ng-disabled="form.$invalid">
                       <span class="fa fa-plus fa-lg fa-icon"></span> Add
                     </button>
-                    <button type="reset" ng-click="$ctrl.clearSession()" class="btn btn-info">
+                    <button type="reset" ng-click="$ctrl.clearCatch()" class="btn btn-info">
                       <span class="fa fa-eraser fa-lg fa-icon"></span> Clear
                     </button>
                   </div>
@@ -39,8 +27,8 @@
             </div>
           </form>
           <br />
-          <subheader text="Past Sessions" subtext="({{$ctrl.sessionModel.sessions.length}} found)">
-            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshSessions()">
+          <subheader text="Past Catches" subtext="({{$ctrl.catchModel.catches.length}} found)">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshCatches()">
               <span class="fa fa-refresh fa-lg"></span>
             </a>
           </subheader>
@@ -48,19 +36,17 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Venue</th>
-                <th>Date</th>
+                <th>Session</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="session in $ctrl.sessionModel.sessions">
-                <td>{{session.id}}</td>
-                <td><select id="venue" ng-model="session.venue" class="form-control" ng-options="venue.code as (venue.bodyOfWaterName + ' - ' + venue.name) for venue in $ctrl.venueModel.venues"></select></td>
-                <td><input id="date" type="text" class="form-control" ng-model="session.date"></td>
-                <td><a href="#" ng-click="$ctrl.sessionModel.updateSession(session)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.sessionModel.deleteSession(session)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
+              <tr ng-repeat="catch in $ctrl.catchModel.catches">
+                <td>{{catch.id}}</td>
+                <td><select id="session" ng-model="catch.session" class="form-control" ng-options="session.id as (session.date + ' - ' + session.venueName) for session in $ctrl.sessionModel.sessions"></select></td>
+                <td><a href="#" ng-click="$ctrl.catchModel.updateCatch(catch)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.catchModel.deleteCatch(catch)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>
               <tr>
-                <td colspan="8" style="text-align: right;">{{$ctrl.sessionModel.sessions.length}} found</td>
+                <td colspan="8" style="text-align: right;">{{$ctrl.catchModel.catches.length}} found</td>
               </tr>
             </tbody>
           </table>

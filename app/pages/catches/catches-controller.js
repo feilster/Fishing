@@ -3,33 +3,38 @@
 
   angular.module('fishingApp')
 
-  .controller('PagesCatchesController', function (CatchService, CatchService, MessageService, $timeout) {
+  .controller('PagesCatchesController', function (CatchService, SessionService, AnglerService, FishService, MessageService, $timeout) {
 
     var vm = this;
 
-    vm.session = {id: null, session: null, angler: null, fish: null, weight: null}
+    vm.catch = {id: null, session: null, angler: null, fish: null, weight: null}
 
-    vm.sessionModel = CatchService;
+    vm.catchModel = CatchService;
+    vm.sessionModel = SessionService;
+    vm.anglerModel = AnglerService;
+    vm.fishModel = FishService;
     vm.messageModel = MessageService;
-    vm.venueModel = CatchService;
 
     // if empty list refresh from service
     if(!CatchService || !CatchService.sessions || Object.keys(CatchService.sessions).length==0) {
       CatchService.getCatches();
     }
     // if empty list refresh from service
-    if(Object.keys(CatchService.catches).length==0) {
-      CatchService.getCatchs();
+    if(Object.keys(SessionService.sessions).length==0) {
+      SessionService.getSessions();
+    }
+    // if empty list refresh from service
+    if(Object.keys(AnglerService.anglers).length==0) {
+      AnglerService.getAnglers();
+    }
+    // if empty list refresh from service
+    if(Object.keys(FishService.fishes).length==0) {
+      FishService.getFish();
     }
 
     $timeout(function () {
       vm.setSelects();
     }, 2000);
-
-    vm.insertCatch = function (){
-      vm.session.date = toISOString(vm.session.date);
-      vm.sessionModel.insertCatch(vm.session);
-    }
 
     vm.clearCatch = function (){
       vm.session.date = null;
@@ -42,8 +47,14 @@
     }
 
     vm.setSelects = function(){
-      if(vm.venueModel.catches){
-        vm.session.venue = vm.venueModel.catches[0].code;
+      if(vm.sessionModel.sessions){
+        vm.catch.session = vm.sessionModel.sessions[0].code;
+      }
+      if(vm.anglerModel.anglers){
+        vm.catch.angler = vm.anglerModel.anglers[0].code;
+      }
+      if(vm.fishModel.sessions){
+        vm.catch.fish = vm.fishModel.fishes[0].code;
       }
     }
 
