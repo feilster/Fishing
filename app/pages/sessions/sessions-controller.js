@@ -27,11 +27,11 @@
     };
 
     // if empty list refresh from service
-    if(Object.keys(vm.sessionModel.sessions).length==0) {
+    if(!SessionService || !SessionService.sessions || Object.keys(SessionService.sessions).length==0) {
       SessionService.getSessions();
     }
     // if empty list refresh from service
-    if(Object.keys(vm.venueModel.venues).length==0) {
+    if(Object.keys(VenueService.venues).length==0) {
       VenueService.getVenues();
     }
 
@@ -40,8 +40,7 @@
     }, 2000);
 
     vm.insertSession = function (){
-      console.log('venue : '+vm.session.venue);
-      console.log('date : '+vm.session.date);
+      vm.session.date = toISOString(vm.session.date);
       vm.sessionModel.insertSession(vm.session);
     }
 
@@ -52,7 +51,7 @@
 
     vm.refreshSessions = function (){
       SessionService.getSessions();
-      MessageService.successMessage = MessageService.refreshSuccessMessage;
+      MessageService.successMessage = MessageService.refreshSuccess;
     }
 
     vm.setSelects = function(){

@@ -29,11 +29,11 @@
           return promise;
       };
 
-      factory.deleteSession = function (id){
+      factory.deleteSession = function (session){
            var promise = $http({
                method: 'POST',
                url: url,
-               data: $.param({'requestType':'deleteSession', 'id':id}),
+               data: $.param({'requestType':'deleteSession', 'id':session.id}),
                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               });
            return promise;
@@ -43,7 +43,7 @@
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateSession', 'id':session.id , 'session':session.session, 'date':session.date}),
+                data: $.param({'requestType':'updateSession', 'id':session.id , 'venue':session.venue, 'date':session.date}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

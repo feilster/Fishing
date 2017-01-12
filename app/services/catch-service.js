@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteCatch = function (code){
+    service.deleteCatch = function (id){
       MessageService.clearMessages();
-      CatchFactory.deleteCatch(code)
+      CatchFactory.deleteCatch(id)
       .then(function(response) {
         doThen(response);
       }, function(response) {

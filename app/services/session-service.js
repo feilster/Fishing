@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteSession = function (code){
+    service.deleteSession = function (session){
       MessageService.clearMessages();
-      SessionFactory.deleteSession(code)
+      SessionFactory.deleteSession(session)
       .then(function(response) {
         doThen(response);
       }, function(response) {

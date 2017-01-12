@@ -74,7 +74,7 @@
             <tbody>
               <tr ng-repeat="venue in $ctrl.venueModel.venues">
                 <td>{{venue.code}}</td>
-                <td><select id="bodyOfWater" ng-model="venue.body_of_water" class="form-control" ng-options="bodyOfWater.code as bodyOfWater.name for bodyOfWater in $ctrl.bodyOfWaterModel.bodiesOfWater"></select></td>
+                <td><select id="bodyOfWater" ng-model="venue.bodyOfWater" class="form-control" ng-options="bodyOfWater.code as bodyOfWater.name for bodyOfWater in $ctrl.bodyOfWaterModel.bodiesOfWater"></select></td>
                 <td><input id="name" type="text" class="form-control" ng-model="venue.name"></td>
                 <td><input id="comments" type="text" class="form-control" ng-model="venue.comments"></td>
                 <td><input id="rates" type="text" class="form-control" ng-model="venue.rates"></td>

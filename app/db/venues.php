@@ -30,7 +30,9 @@ function getVenues($conn){
 
 		$data = array();
 
-		$sql = "SELECT * FROM venues";
+		$sql = "SELECT v.code, v.body_of_water as bodyOfWater, v.name, v.comments, v.rates, b.code as bodyOfWaterCode, b.name as bodyOfWaterName ";
+		$sql .= "FROM venues v ";
+		$sql .= "INNER JOIN bodies_of_water b ON v.body_of_water = b.code";
 
 		$result = mysqli_query($conn, $sql);
 
