@@ -19,31 +19,31 @@
          return promise;
      };
 
-     factory.insertCatch = function (catch){
+     factory.insertCatch = function (catchModel){
           var promise = $http({
               method: 'POST',
               url: url,
-              data: $.param({'requestType':'insertCatch', 'session':catch.session, 'angler':catch.angler, 'fish':catch.fish, 'weight':catch.weight}),
+              data: $.param({'requestType':'insertCatch', 'session':catchModel.session, 'angler':catchModel.angler, 'fish':catchModel.fish, 'amount':catchModel.amount, 'weight':catchModel.weight}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
       };
 
-      factory.deleteCatch = function (id){
+      factory.deleteCatch = function (catchModel){
            var promise = $http({
                method: 'POST',
                url: url,
-               data: $.param({'requestType':'deleteCatch', 'id':id}),
+               data: $.param({'requestType':'deleteCatch', 'id':catchModel.id}),
                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
               });
            return promise;
        };
 
-       factory.updateCatch = function (catch){
+       factory.updateCatch = function (catchModel){
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateCatch', 'id':catch.id, 'session':catch.session, 'angler':catch.angler, 'fish':catch.fish, 'weight':catch.weight}),
+                data: $.param({'requestType':'updateCatch', 'id':catchModel.id, 'session':catchModel.session, 'angler':catchModel.angler, 'fish':catchModel.fish, 'amount':catchModel.amount, 'weight':catchModel.weight}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

@@ -43,7 +43,7 @@
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateAngler', 'id':angler.id, 'nickName':angler.nick_name, 'firstName':angler.first_name, 'surname':angler.surname}),
+                data: $.param({'requestType':'updateAngler', 'id':angler.id, 'nickName':angler.nickName, 'firstName':angler.firstName, 'surname':angler.surname}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;

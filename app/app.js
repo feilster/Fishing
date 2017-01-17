@@ -10,25 +10,25 @@ angular.module('fishingApp', ['ui.router', 'ui.bootstrap', 'ngMessages'])
       url: '/',
       templateUrl: './app/home.html'
     })
-    .state('fish', {
-      url: '/fish',
-      component: 'adminFish'
-    })
-    .state('venues', {
-      url: '/venues',
-      component: 'adminVenues'
-    })
     .state('anglers', {
       url: '/anglers',
       component: 'adminAnglers'
+    })
+    .state('catches', {
+      url: '/catches',
+      component: 'pagesCatches'
+    })
+    .state('fish', {
+      url: '/fish',
+      component: 'adminFish'
     })
     .state('sessions', {
       url: '/sessions',
       component: 'pagesSessions'
     })
-    .state('catches', {
-      url: '/catches',
-      component: 'pagesCatches'
+    .state('venues', {
+      url: '/venues',
+      component: 'adminVenues'
     })
 
 });

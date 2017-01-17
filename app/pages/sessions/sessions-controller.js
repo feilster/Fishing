@@ -18,7 +18,6 @@
     };
 
     vm.dateOptions = {
-       minDate: new Date(),
        showWeeks: true
     };
 

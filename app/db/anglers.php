@@ -30,7 +30,7 @@ function getAnglers($conn){
 
 		$data = array();
 
-		$sql = "SELECT * FROM anglers";
+		$sql = "SELECT id, first_name as firstName, surname, nick_name as nickName FROM anglers";
 
 		$result = mysqli_query($conn, $sql);
 

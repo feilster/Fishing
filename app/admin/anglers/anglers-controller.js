@@ -22,7 +22,7 @@
     }
 
     vm.clearAngler = function (){
-      vm.angler.nick_name = null;
+      vm.angler.nickName = null;
       vm.angler.firstName = null;
       vm.angler.surname = null;
     }

@@ -55,8 +55,8 @@
             <tbody>
               <tr ng-repeat="angler in $ctrl.anglerModel.anglers">
                 <td>{{angler.id}}</td>
-                <td><input id="nickName" type="text" class="form-control" ng-model="angler.nick_name"></td>
-                <td><input id="firstName" type="text" class="form-control" ng-model="angler.first_name"></td>
+                <td><input id="nickName" type="text" class="form-control" ng-model="angler.nickName"></td>
+                <td><input id="firstName" type="text" class="form-control" ng-model="angler.firstName"></td>
                 <td><input id="surname" type="text" class="form-control" ng-model="angler.surname"></td>
                 <td><a href="#" ng-click="$ctrl.anglerModel.updateAngler(angler)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.anglerModel.deleteAngler(angler.id)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>

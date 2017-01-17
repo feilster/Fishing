@@ -6,21 +6,59 @@
               <div class="row" style="padding: 5px;">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group">
-                    <label for="session" class="required-input">Venue</label>
-                    <select id="session" name="session" ng-model="$ctrl.catch.session" class="form-control" ng-options="session.id as (session.date + ' - ' + session.venueName) for session in $ctrl.sessionModel.sessions" required></select>
+                    <label for="session" class="required-input">Session</label>
+                    <select id="session" name="session" ng-model="$ctrl.catch.session" class="form-control" ng-options="session.id as (session.date + ' - ' + session.bodyOfWater + ' - ' + session.venueName) for session in $ctrl.sessionModel.sessions" required></select>
                     <div ng-messages="form.session.$error" ng-show="form.session.$touched && form.session.$invalid" class="error-text">
                       <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="angler" class="required-input">Angler</label>
+                    <select id="angler" name="angler" ng-model="$ctrl.catch.angler" class="form-control" ng-options="angler.id as angler.nickName for angler in $ctrl.anglerModel.anglers" required></select>
+                    <div ng-messages="form.angler.$error" ng-show="form.angler.$touched && form.angler.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group form-buttons">
-                    <button type="submit" ng-click="$ctrl.catchModel.insertCatch()" class="btn btn-primary" ng-disabled="form.$invalid">
+                    <button type="submit" ng-click="$ctrl.catchModel.insertCatch($ctrl.catch)" class="btn btn-primary" ng-disabled="form.$invalid">
                       <span class="fa fa-plus fa-lg fa-icon"></span> Add
                     </button>
                     <button type="reset" ng-click="$ctrl.clearCatch()" class="btn btn-info">
                       <span class="fa fa-eraser fa-lg fa-icon"></span> Clear
                     </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding: 5px;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="fish" class="required-input">Fish</label>
+                    <select id="fish" name="fish" ng-model="$ctrl.catch.fish" class="form-control" ng-options="fish.code as (fish.sub_type + ' ' + fish.type) for fish in $ctrl.fishModel.fishes" required></select>
+                    <div ng-messages="form.fish.$error" ng-show="form.fish.$touched && form.fish.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="amount" class="required-input">Amount</label>
+                    <select id="amount" name="amount" ng-model="$ctrl.catch.amount" class="form-control" ng-options="n for n in $ctrl.amountRange" required></select>
+                    <div ng-messages="form.amount.$error" ng-show="form.amount.$touched && form.amount.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <div class="form-group">
+                    <label for="weight" class="required-input">Weight</label>
+                    <select id="weight" name="weight" ng-model="$ctrl.catch.weight" class="form-control" ng-options="n as (n + ' kg') for n in $ctrl.weightRange" required></select>
+                    <div ng-messages="form.weight.$error" ng-show="form.weight.$touched && form.weight.$invalid" class="error-text">
+                      <div ng-message="required">{{$ctrl.messageModel.requiredSelect}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -37,12 +75,20 @@
               <tr>
                 <th>Id</th>
                 <th>Session</th>
+                <th>Angler</th>
+                <th>Fish</th>
+                <th>Amount</th>
+                <th>Weight</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="catch in $ctrl.catchModel.catches">
                 <td>{{catch.id}}</td>
                 <td><select id="session" ng-model="catch.session" class="form-control" ng-options="session.id as (session.date + ' - ' + session.venueName) for session in $ctrl.sessionModel.sessions"></select></td>
+                <td><select id="angler" name="angler" ng-model="catch.angler" class="form-control" ng-options="angler.id as angler.nickName for angler in $ctrl.anglerModel.anglers"></select></td>
+                <td><select id="fish" name="fish" ng-model="catch.fish" class="form-control" ng-options="fish.code as (fish.sub_type + ' ' + fish.type) for fish in $ctrl.fishModel.fishes"></select></td>
+                <td><select id="amount" name="amount" ng-model="catch.amount" class="form-control" ng-options="n for n in $ctrl.amountRange"></select></td>
+                <td><select id="weight" name="weight" ng-model="catch.weight" class="form-control" ng-options="n as (n + ' kg') for n in $ctrl.weightRange"></select></td>
                 <td><a href="#" ng-click="$ctrl.catchModel.updateCatch(catch)"><span class="fa fa-pencil fa-lg fa-icon"></span></a> <a href="#" ng-click="$ctrl.catchModel.deleteCatch(catch)"><i class="fa fa-trash fa-lg fa-icon"></i></a></td>
               </tr>
               <tr>

@@ -30,7 +30,10 @@ function getSessions($conn){
 
 		$data = array();
 
-		$sql = "SELECT * FROM sessions";
+		$sql = "SELECT s.id, s.date, s.venue, v.body_of_water as bodyOfWater, v.name as venueName ";
+		$sql .= "FROM sessions s ";
+		$sql .= "INNER JOIN venues v ON s.venue = v.code ";
+		$sql .= "order by id desc";
 
 		$result = mysqli_query($conn, $sql);
 

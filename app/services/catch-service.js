@@ -22,9 +22,9 @@
       });
     };
 
-    service.insertCatch = function (catch){
+    service.insertCatch = function (catchModel){
       MessageService.clearMessages();
-      CatchFactory.insertCatch(catch)
+      CatchFactory.insertCatch(catchModel)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -32,9 +32,9 @@
 	    });
     };
 
-    service.deleteCatch = function (id){
+    service.deleteCatch = function (catchModel){
       MessageService.clearMessages();
-      CatchFactory.deleteCatch(id)
+      CatchFactory.deleteCatch(catchModel)
       .then(function(response) {
         doThen(response);
       }, function(response) {
@@ -42,9 +42,9 @@
 	    });
     };
 
-    service.updateCatch = function (catch){
+    service.updateCatch = function (catchModel){
       MessageService.clearMessages();
-      CatchFactory.updateCatch(catch)
+      CatchFactory.updateCatch(catchModel)
       .then(function(response) {
         doThen(response);
       }, function(response) {

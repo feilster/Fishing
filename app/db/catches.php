@@ -30,12 +30,13 @@ function getCatches($conn){
 
 		$data = array();
 
-		$sql = "SELECT c.id, c.session, c.angler, c.fish, c.weight, s.date as sessionDate, s.venue as sessionVenue ";
-		$sql = "a.nick_name as anglerName, s.date as sessionDate, f.type as fishType, f.sub_type as fishSubType ";
+		$sql = "SELECT c.id, c.session, c.angler, c.fish, c.weight, c.amount, s.date as sessionDate, s.venue as sessionVenue, ";
+		$sql .= "a.nick_name as anglerName, s.date as sessionDate, f.type as fishType, f.sub_type as fishSubType ";
 		$sql .= "FROM catches c ";
-		$sql .= "INNER JOIN sessions s ON c.session = s.id";
-		$sql .= "INNER JOIN anglers a ON c.angler = a.id";
-		$sql .= "INNER JOIN fish f ON c.fish = f.code";
+		$sql .= "INNER JOIN sessions s ON c.session = s.id ";
+		$sql .= "INNER JOIN anglers a ON c.angler = a.id ";
+		$sql .= "INNER JOIN fish f ON c.fish = f.code ";
+		$sql .= "order by c.id desc";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -64,13 +65,14 @@ function insertCatch($conn){
 		$session = $conn->real_escape_string(isset( $_POST['session'] ) ? $_POST['session'] : '');
 		$angler = $conn->real_escape_string(isset( $_POST['angler'] ) ? strtoupper($_POST['angler']) : '');
 		$fish = $conn->real_escape_string(isset( $_POST['fish'] ) ? $_POST['fish'] : '');
+		$amount = $conn->real_escape_string(isset( $_POST['amount'] ) ? $_POST['amount'] : '');
 		$weight = $conn->real_escape_string(isset( $_POST['weight'] ) ? $_POST['weight'] : '');
 
 		if($session == '' || $angler == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Fish or session cannot be empty';
 		} else {
-			$sql = "INSERT INTO catches (session, angler, fish, weight)  VALUES ('$session', '$angler', '$fish', '$weight')";
+			$sql = "INSERT INTO catches (session, angler, fish, amount, weight)  VALUES ('$session', '$angler', '$fish', $amount, '$weight')";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully added";
@@ -124,13 +126,14 @@ function updateCatch($conn){
 		$session = $conn->real_escape_string(isset( $_POST['session'] ) ? $_POST['session'] : '');
 		$angler = $conn->real_escape_string(isset( $_POST['angler'] ) ? strtoupper($_POST['angler']) : '');
 		$fish = $conn->real_escape_string(isset( $_POST['fish'] ) ? $_POST['fish'] : '');
+		$amount = $conn->real_escape_string(isset( $_POST['amount'] ) ? $_POST['amount'] : '');
 		$weight = $conn->real_escape_string(isset( $_POST['weight'] ) ? $_POST['weight'] : '');
 
 		if($id == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Id cannot be empty';
 		} else {
-			$sql = "update catches set session = '$session', angler = '$angler', fish = '$fish', weight = '$weight' where id = '$id'";
+			$sql = "update catches set session = '$session', angler = '$angler', fish = '$fish', amount = '$amount' where id = '$id'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";
