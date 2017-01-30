@@ -43,6 +43,8 @@ function getCatches($conn){
 		if($conn->query( $sql )){
 			$data['success'] = true;
 			while($row = $result->fetch_assoc()){
+				$row['weight'] = floatval($row['weight']);
+				$row['amount'] = (int) $row['amount'];
 				$data['records'][] = $row;
 			}
 		} else {
@@ -133,7 +135,7 @@ function updateCatch($conn){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Id cannot be empty';
 		} else {
-			$sql = "update catches set session = '$session', angler = '$angler', fish = '$fish', amount = '$amount' where id = '$id'";
+			$sql = "update catches set session = '$session', angler = '$angler', fish = '$fish', amount = '$amount', weight = '$weight' where id = '$id'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";

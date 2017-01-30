@@ -6,17 +6,11 @@ if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
 	$type = $_POST['requestType'];
 
 	switch ($type) {
-		case "getSessions":
-			getSessions($conn);
+		case "getAnglerCatches":
+			getAnglerCatches($conn);
 			break;
-		case "insertSession":
-			insertSession($conn);
-			break;
-		case "deleteSession":
-			deleteSession($conn, $_POST['id']);
-			break;
-		case "updateSession":
-			updateSession($conn, $_POST['id']);
+		case "getVenueCatches":
+			getVenueCatches($conn);
 			break;
 		default:
 		error("Invalid request");
@@ -25,15 +19,12 @@ if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
 	error("Invalid request");
 }
 
-function getSessions($conn){
+function getAnglerCatches($conn){
 	try{
 
 		$data = array();
 
-		$sql = "SELECT s.id, s.date, s.venue, s.comments, v.body_of_water as bodyOfWater, v.name as venueName ";
-		$sql .= "FROM sessions s ";
-		$sql .= "INNER JOIN venues v ON s.venue = v.code ";
-		$sql .= "order by id desc";
+		$sql = "SELECT id, first_name as firstName, surname, nick_name as nickName FROM anglers";
 
 		$result = mysqli_query($conn, $sql);
 
@@ -56,19 +47,18 @@ function getSessions($conn){
 	}
 }
 
-function insertSession($conn){
+function insertAngler($conn){
 	try{
 		$data = array();
-		$venue = $conn->real_escape_string(isset( $_POST['venue'] ) ? $_POST['venue'] : '');
-		$date = $conn->real_escape_string(isset( $_POST['date'] ) ? $_POST['date'] : '');
-		$date = date('Y-m-d', strtotime($date));
-		$comments = $conn->real_escape_string(isset( $_POST['comments'] ) ? $_POST['comments'] : '');
+		$nickName = $conn->real_escape_string(isset( $_POST['nickName'] ) ? $_POST['nickName'] : '');
+		$firstName = $conn->real_escape_string(isset( $_POST['firstName'] ) ? $_POST['firstName'] : '');
+		$surname = $conn->real_escape_string(isset( $_POST['surname'] ) ? $_POST['surname'] : '');
 
-		if($venue == ''){
+		if($nickName == ''){
 			$data['success'] = false;
-			$data['message'] = 'Failed: Venue cannot be empty';
+			$data['message'] = 'Failed: Nick Name cannot be empty';
 		} else {
-			$sql = "INSERT INTO sessions (venue, date, comments)  VALUES ('$venue', '$date', '$comments')";
+			$sql = "INSERT INTO anglers (nick_name, first_name, surname)  VALUES ('$nickName', '$firstName', '$surname')";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully added";
@@ -87,7 +77,7 @@ function insertSession($conn){
 	}
 }
 
-function deleteSession($conn, $id = ''){
+function deleteAngler($conn, $id = ''){
 	try{
 
 		$data = array();
@@ -97,7 +87,7 @@ function deleteSession($conn, $id = ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Id cannot be empty';
 		} else {
-			$sql = "DELETE FROM sessions WHERE id = '$id'";
+			$sql = "DELETE FROM anglers WHERE id = '$id'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully deleted";
@@ -115,19 +105,19 @@ function deleteSession($conn, $id = ''){
 	}
 }
 
-function updateSession($conn){
+function updateAngler($conn){
 	try{
 		$data = array();
-		$id = $conn->real_escape_string(isset( $_POST['id'] ) ? $_POST['id'] : '');
-		$venue = $conn->real_escape_string(isset( $_POST['venue'] ) ? strtoupper($_POST['venue']) : '');
-		$date = $conn->real_escape_string(isset( $_POST['date'] ) ? $_POST['date'] : '');
-		$comments = $conn->real_escape_string(isset( $_POST['comments'] ) ? $_POST['comments'] : '');
+		$id = $conn->real_escape_string(isset( $_POST['id'] ) ? strtoupper($_POST['id']) : '');
+		$nickName = $conn->real_escape_string(isset( $_POST['nickName'] ) ? $_POST['nickName'] : '');
+		$firstName = $conn->real_escape_string(isset( $_POST['firstName'] ) ? $_POST['firstName'] : '');
+		$surname = $conn->real_escape_string(isset( $_POST['surname'] ) ? $_POST['surname'] : '');
 
 		if($id == ''){
 			$data['success'] = false;
 			$data['message'] = 'Failed: Id cannot be empty';
 		} else {
-			$sql = "update sessions set venue = '$venue', date = '$date', comments = '$comments' where id = '$id'";
+			$sql = "update anglers set nick_name = '$nickName', first_name = '$firstName', surname = '$surname' WHERE id = '$id'";
 			if ($conn->query( $sql )) {
 				$data['success'] = true;
 				$data['message'] = "Successfully updated";

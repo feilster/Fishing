@@ -7,7 +7,7 @@
 
     var vm = this;
 
-    vm.session = {id: null, venue: null, date: null}
+    vm.session = {id: null, venue: null, date: null, comments: null}
 
     vm.sessionModel = SessionService;
     vm.messageModel = MessageService;
@@ -45,6 +45,7 @@
 
     vm.clearSession = function (){
       vm.session.date = null;
+      vm.session.comments = null;
       vm.setSelects();
     }
 

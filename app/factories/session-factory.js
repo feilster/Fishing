@@ -23,7 +23,7 @@
           var promise = $http({
               method: 'POST',
               url: url,
-              data: $.param({'requestType':'insertSession', 'venue':session.venue, 'date':session.date}),
+              data: $.param({'requestType':'insertSession', 'venue':session.venue, 'date':session.date, 'comments':session.comments}),
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
              });
           return promise;
@@ -43,7 +43,7 @@
             var promise = $http({
                 method: 'POST',
                 url: url,
-                data: $.param({'requestType':'updateSession', 'id':session.id , 'venue':session.venue, 'date':session.date}),
+                data: $.param({'requestType':'updateSession', 'id':session.id , 'venue':session.venue, 'date':session.date, 'comments':session.comments}),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                });
             return promise;
