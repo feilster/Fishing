@@ -3,10 +3,10 @@
 
   angular.module('fishingApp')
 
-  .factory('SessionFactory', function ($http) {
+  .factory('SessionFactory', function ($http, ConstantsService) {
 
     var factory = {};
-    var url = 'http://localhost:8080/Fishing/app/db/sessions.php';
+    var url = ConstantsService.sessionsUrl;
 
     // get all data from database
     factory.getSessions = function (){

@@ -6,10 +6,6 @@ angular.module('fishingApp', ['ui.router', 'ui.bootstrap', 'ngMessages'])
 .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-    .state('home', {
-      url: '/',
-      templateUrl: './app/home.html'
-    })
     .state('anglers', {
       url: '/anglers',
       component: 'adminAnglers'
@@ -25,6 +21,10 @@ angular.module('fishingApp', ['ui.router', 'ui.bootstrap', 'ngMessages'])
     .state('sessions', {
       url: '/sessions',
       component: 'pagesSessions'
+    })
+    .state('stats', {
+      url: '/stats',
+      component: 'pagesStats'
     })
     .state('venues', {
       url: '/venues',

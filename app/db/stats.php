@@ -4,27 +4,26 @@ include_once 'db.php';
 
 if( isset($_POST['requestType']) && !empty( isset($_POST['requestType']) ) ){
 	$type = $_POST['requestType'];
-
-	switch ($type) {
-		case "getAnglerCatches":
-			getAnglerCatches($conn);
-			break;
-		case "getVenueCatches":
-			getVenueCatches($conn);
-			break;
-		default:
-		error("Invalid request");
-	}
+	getStats($conn, $type);
 }else{
-	error("Invalid request");
+	error("No request found");
 }
 
-function getAnglerCatches($conn){
+function getStats($conn, $type){
 	try{
 
 		$data = array();
 
-		$sql = "SELECT id, first_name as firstName, surname, nick_name as nickName FROM anglers";
+		switch ($type) {
+			case "getAnglerCatches":
+				$sql = "SELECT SUM(c.amount) as amount, a.nick_name as angler FROM catches c INNER JOIN anglers a ON c.angler = a.id group by angler order by amount desc";
+				break;
+			case "getFishCatches":
+				$sql = "SELECT sum(c.amount) as amount, max(c.weight) as biggest, round(avg(c.weight),1) as avg, f.type as fishType, f.sub_type as fishSubType FROM catches c INNER JOIN fish f ON c.fish = f.code group by c.fish order by amount desc";
+				break;
+			default:
+				error("Invalid request");
+		}
 
 		$result = mysqli_query($conn, $sql);
 
@@ -37,95 +36,6 @@ function getAnglerCatches($conn){
 			$data['success'] = false;
 			$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
 		};
-
-		$conn->close();
-		echo json_encode($data);
-		exit;
-
-	}catch (Exception $e){
-		error($e->getMessage());
-	}
-}
-
-function insertAngler($conn){
-	try{
-		$data = array();
-		$nickName = $conn->real_escape_string(isset( $_POST['nickName'] ) ? $_POST['nickName'] : '');
-		$firstName = $conn->real_escape_string(isset( $_POST['firstName'] ) ? $_POST['firstName'] : '');
-		$surname = $conn->real_escape_string(isset( $_POST['surname'] ) ? $_POST['surname'] : '');
-
-		if($nickName == ''){
-			$data['success'] = false;
-			$data['message'] = 'Failed: Nick Name cannot be empty';
-		} else {
-			$sql = "INSERT INTO anglers (nick_name, first_name, surname)  VALUES ('$nickName', '$firstName', '$surname')";
-			if ($conn->query( $sql )) {
-				$data['success'] = true;
-				$data['message'] = "Successfully added";
-			} else {
-				$data['success'] = false;
-				$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
-			}
-		}
-
-		$conn->close();
-		echo json_encode($data);
-		exit;
-
-	}catch (Exception $e){
-		error($e->getMessage());
-	}
-}
-
-function deleteAngler($conn, $id = ''){
-	try{
-
-		$data = array();
-		$id = $conn->real_escape_string(isset( $_POST['id'] ) ? $_POST['id'] : '');
-
-		if($id == ''){
-			$data['success'] = false;
-			$data['message'] = 'Failed: Id cannot be empty';
-		} else {
-			$sql = "DELETE FROM anglers WHERE id = '$id'";
-			if ($conn->query( $sql )) {
-				$data['success'] = true;
-				$data['message'] = "Successfully deleted";
-			} else {
-				$data['success'] = false;
-				$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
-			}
-		}
-			$conn->close();
-			echo json_encode($data);
-			exit;
-
-	}catch (Exception $e){
-		error($e->getMessage());
-	}
-}
-
-function updateAngler($conn){
-	try{
-		$data = array();
-		$id = $conn->real_escape_string(isset( $_POST['id'] ) ? strtoupper($_POST['id']) : '');
-		$nickName = $conn->real_escape_string(isset( $_POST['nickName'] ) ? $_POST['nickName'] : '');
-		$firstName = $conn->real_escape_string(isset( $_POST['firstName'] ) ? $_POST['firstName'] : '');
-		$surname = $conn->real_escape_string(isset( $_POST['surname'] ) ? $_POST['surname'] : '');
-
-		if($id == ''){
-			$data['success'] = false;
-			$data['message'] = 'Failed: Id cannot be empty';
-		} else {
-			$sql = "update anglers set nick_name = '$nickName', first_name = '$firstName', surname = '$surname' WHERE id = '$id'";
-			if ($conn->query( $sql )) {
-				$data['success'] = true;
-				$data['message'] = "Successfully updated";
-			} else {
-				$data['success'] = false;
-				$data['message'] = 'Failed: ' . $conn->sqlstate . ' - ' . $conn->error;
-			}
-		}
 
 		$conn->close();
 		echo json_encode($data);

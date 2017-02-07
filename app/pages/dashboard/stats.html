@@ -1,0 +1,22 @@
+
+          <header text="Dashboard"></header>
+          <messages></messages>
+          <subheader text="Catches" subtext="({{$ctrl.statsModel.anglerCatches.length}} found)">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshCatches()">
+              <span class="fa fa-refresh fa-lg"></span>
+            </a>
+          </subheader>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Angler</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="anglerCatch in $ctrl.statsModel.anglerCatches">
+                <td>{{anglerCatch.angler}}</td>
+                <td>{{anglerCatch.amount}}</td>
+              </tr>
+            </tbody>
+          </table>

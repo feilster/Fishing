@@ -1,0 +1,45 @@
+
+          <header text="Dashboard"></header>
+          <messages></messages>
+          <subheader text="Catches by fish">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshFishCatches()">
+              <span class="fa fa-refresh fa-lg"></span>
+            </a>
+          </subheader>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Fish</th>
+                <th>Amount</th>
+                <th>Biggest</th>
+                <th>Avg Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="fishCatch in $ctrl.statsModel.fishCatches">
+                <td>{{fishCatch.fishSubType}} {{fishCatch.fishType}}</td>
+                <td>{{fishCatch.amount}}</td>
+                <td>{{fishCatch.biggest}}</td>
+                <td>{{fishCatch.avg}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <subheader text="Catches by angler">
+            <a class="refresh-icon" href="#" ng-click="$ctrl.refreshAnglerCatches()">
+              <span class="fa fa-refresh fa-lg"></span>
+            </a>
+          </subheader>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Angler</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="anglerCatch in $ctrl.statsModel.anglerCatches">
+                <td>{{anglerCatch.angler}}</td>
+                <td>{{anglerCatch.amount}}</td>
+              </tr>
+            </tbody>
+          </table>
