@@ -1,5 +1,10 @@
 body {
   color: #666;
+  background-image: url(../images/dusk-wader.png);
+}
+
+h1 {
+  color: #FFF;
 }
 
 input[type="text"], select {

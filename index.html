@@ -11,9 +11,13 @@
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">
-          <h1>My Fishing App</h1>
-          <div ng-include src="'./app/layout/nav.html'"></div>
-          <ui-view></ui-view>
+          <div class="row">
+            <h1>My Fishing App</h1>
+          </div>
+          <div class="row" style="background: #FFF; padding: 10px; box-shadow: 3px 3px 15px black;">
+            <div ng-include src="'./app/layout/nav.html'"></div>
+            <ui-view></ui-view>
+          </div>
         </div>
         <div class="col-lg-1"></div>
       </div>
