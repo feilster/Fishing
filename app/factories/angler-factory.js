@@ -6,7 +6,7 @@
   .factory('AnglerFactory', function ($http) {
 
     var factory = {};
-    var url = 'http://localhost:8080/Fishing/app/db/anglers.php';
+    var url = 'http://sites:8080/Fishing/app/db/anglers.php';
 
     // get all data from database
     factory.getAnglers = function (){
