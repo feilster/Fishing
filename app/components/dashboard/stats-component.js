@@ -5,7 +5,7 @@
 
   .component('stats', {
 
-    templateUrl: './app/pages/stats/stats.html',
+    templateUrl: 'components/stats/stats.html',
     controller: 'PagesStatsController'
 
   });

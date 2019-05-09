@@ -5,7 +5,7 @@
 
   .component('adminAnglers', {
 
-    templateUrl: './app/admin/anglers/anglers.html',
+    templateUrl: 'component/admin/anglers/anglers.html',
     controller: 'AdminAnglersController'
 
   });

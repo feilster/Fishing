@@ -5,7 +5,7 @@
 
   .component('pagesCatches', {
 
-    templateUrl: './app/pages/catches/catches.html',
+    templateUrl: 'components/catches/catches.html',
     controller: 'PagesCatchesController'
 
   });

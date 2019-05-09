@@ -5,7 +5,7 @@
 
   .component('pagesSessions', {
 
-    templateUrl: './app/pages/sessions/sessions.html',
+    templateUrl: 'components/sessions/sessions.html',
     controller: 'PagesSessionsController'
 
   });

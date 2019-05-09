@@ -5,7 +5,7 @@
 
   .component('adminVenues', {
 
-    templateUrl: './app/admin/venues/venues.html',
+    templateUrl: 'component/admin/venues/venues.html',
     controller: 'AdminVenuesController'
 
   });
