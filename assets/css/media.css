@@ -1,8 +1,0 @@
-@media screen and (max-width: 1120px) {
-  input[type="text"], select, span, div, p {
-      font-size: 12px;
-  }
-  input[type="text"], select {
-      padding: 1px;
-  }
-}
