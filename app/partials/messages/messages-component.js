@@ -5,7 +5,7 @@
 
   .component('messages', {
 
-    templateUrl: './app/partials/messages/messages.html',
+    templateUrl: 'partials/messages/messages.html',
     controller: 'MessagesController'
 
   });

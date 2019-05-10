@@ -5,7 +5,7 @@
 
   .component('adminFish', {
 
-    templateUrl: 'component/admin/fish/fish.html',
+    templateUrl: 'components/admin/fish/fish.html',
     controller: 'AdminFishController'
 
   });
