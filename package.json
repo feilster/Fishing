@@ -1,6 +1,6 @@
 {
   "name": "fishing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "AngularJS Fishing application",
   "main": "index.html",
@@ -9,9 +9,9 @@
     "url": "git+https://github.com/Skerwe/Fishing.git"
   },
   "keywords": [
-    "Fishing"
+    "fishing"
   ],
-  "author": "",
+  "author": "feilster",
   "contributors": [
     "Quintin Henn <quintin.henn@gmail.com>"
   ],
@@ -53,7 +53,7 @@
     "clean-libs": "trash app/lib/*",
     "copy-libs": "npm-run-all copy:angular copy:h5bp copy:font-awesome copy:bootstrap copy:jquery copy:ui-router copy:ui-bootstrap",
     "copy:angular": "cpx \"node_modules/{angular,angular-animate,angular-loader,angular-messages,angular-touch}/**/*\" app/lib -C",
-    "copy:h5bp": "cpx \"node_modules/html5-boilerplate/dist/**/*\" app/lib/html5-boilerplate -C",
+    "copy:h5bp": "cpx \"node_modules/html5-boilerplate/dist/{css/normalize.css,js/vendor/modernizr-3.7.1.min.js}\" app/lib/html5-boilerplate -C",
     "copy:font-awesome": "cpx \"node_modules/font-awesome/{css,fonts}/*\" app/lib/font-awesome -C",
     "copy:bootstrap": "cpx \"node_modules/bootstrap/dist/{css,fonts,js}/*\" app/lib/bootstrap -C",
     "copy:jquery": "cpx \"node_modules/jquery/dist/*\" app/lib/jquery -C",
