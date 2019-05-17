@@ -1,6 +1,6 @@
 {
   "name": "fishing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "AngularJS Fishing application",
   "main": "index.html",
