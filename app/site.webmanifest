@@ -1,11 +1,15 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "Fishing",
+  "name": "Fishing",
+  "description": "A fishing logbook",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
+  "dir": "rtl",
+  "lang": "en",
+  "display": "standalone",
   "start_url": "/?utm_source=homescreen",
   "background_color": "#fafafa",
   "theme_color": "#fafafa"
