@@ -1,15 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="lib/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="lib/ui-bootstrap/ui-bootstrap-csp.css">
+  <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
   <style>
     [ng-cloak] {
       display: none;
     }
   </style>
-  <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="lib/html5-boilerplate/js/vendor/modernizr-3.7.1.min.js"></script>
   <script>
     // include AngularJS loader, which allows the files to load in any order
     //@@NG_LOADER_START@@
@@ -28,31 +32,100 @@
 
     // load all of the dependencies asynchronously.
     $script([
-      'lib/angular/angular.js',
-      'lib/angular-route/angular-route.js',
-      'app.js',
-      'view1/view1.js',
-      'view2/view2.js',
-      'core/version/version.js',
-      'core/version/version-directive.js',
-      'core/version/interpolate-filter.js'
+    'lib/angular/angular.js',
+    'lib/angular-animate/angular-animate.js',
+    'lib/angular-messages/angular-messages.min.js',
+    'lib/jquery/jquery.js',
+    'lib/bootstrap/js/bootstrap.js',
+    'lib/ui-router/angular-ui-router.js',
+    'lib/ui-bootstrap/ui-bootstrap.js',
+    'lib/ui-bootstrap/ui-bootstrap-tpls.js',
+
+    'assets/js/general.js',
+
+    'app.js',
+
+    'factories/angler-factory.js',
+    'factories/body-of-water-factory.js',
+    'factories/catch-factory.js',
+    'factories/fish-factory.js',
+    'factories/session-factory.js',
+    'factories/stats-factory.js',
+    'factories/venue-factory.js',
+    'factories/water-type-factory.js',
+
+    'services/angler-service.js',
+    'services/body-of-water-service.js',
+    'services/catch-service.js',
+    'services/constants-service.js',
+    'services/fish-service.js',
+    'services/message-service.js',
+    'services/session-service.js',
+    'services/stats-service.js',
+    'services/venue-service.js',
+    'services/water-type-service.js',
+
+    'components/admin/anglers/anglers-component.js',
+    'components/admin/fish/fish-component.js',
+    'components/admin/venues/venues-component.js',
+
+    'components/catches/catches-component.js',
+    'components/sessions/sessions-component.js',
+    'components/stats/stats-component.js',
+
+    'filters/only-alpha-directive.js',
+
+    'partials/header-component.js',
+    'partials/subheader-component.js',
+
+    'partials/messages/messages-component.js',
     ], function() {
       // when all is done, execute bootstrap AngularJS application
-      angular.bootstrap(document, ['myApp']);
+      angular.bootstrap(document, ['fishingApp']);
     });
   </script>
-  <title>My AngularJS App</title>
+  <title>Anglinks Fishing Logbook</title>
+  <meta name="description" content="A fishing logbook. Record fishing locations, anglers and catches.">
+
+  <meta name="msapplication-config" content="browserconfig.xml" />
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <link type="text/plain" rel="author" href="humans.txt" />
+
   <link rel="stylesheet" href="app.css">
+
+  <meta name="theme-color" content="#fafafa">
 </head>
 <body ng-cloak>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
 
-  <div ng-view></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="row">
+          <h1>My Fishing App</h1>
+        </div>
+        <div class="row" style="background: #FFF; padding: 10px; box-shadow: 3px 3px 15px black;">
+          <div ng-include src="'layout/nav.html'"></div>
+          <ui-view></ui-view>
+        </div>
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
+  </div>
 
-  <div>AngularJS seed app: v<span app-version></span></div>
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
 </body>
 </html>
