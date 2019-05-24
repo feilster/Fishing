@@ -1,8 +1,8 @@
-# Fishing
+# Anglinks Fishing Logbook
 
 ## About
 
-Fishing record at location and type of catch.
+A fishing logbook. Record fishing locations, anglers and catches.
 
 ## Instructoins
 
